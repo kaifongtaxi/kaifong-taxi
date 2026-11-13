@@ -1479,3 +1479,17 @@ body.has-signbar #view-home { padding-bottom: 128px; }
 .pv-upd a { color: #c8102e; }
 /* pop-up messages sit above the sign-up bar on the phone home page */
 body.has-signbar .toast { bottom: 150px; }
+
+/* driver: waiting-orders board (longest wait first, waiting reward) */
+.offer-board { display: grid; gap: 8px; margin: 14px 0 6px; }
+.offer-board:empty { display: none; }
+.ob-head { display: flex; align-items: center; gap: 8px; color: #fff; }
+.ob-head svg { width: 16px; height: 16px; }
+.ob-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%; min-height: 56px; padding: 10px 12px; border-radius: 14px; border: 1.5px solid #2f333b; background: #1a1d23; color: #fff; font: inherit; text-align: left; cursor: pointer; }
+.ob-main { display: grid; gap: 3px; min-width: 0; }
+.ob-main b { font-size: .9375rem; }
+.ob-main small { font-size: .8125rem; color: #aab0ba; }
+.ob-main em { font-style: normal; color: #ffd54a; font-weight: 700; }
+.ob-side { display: grid; justify-items: end; gap: 3px; font-weight: 800; white-space: nowrap; }
+.ob-side i { font-style: normal; font-size: .8125rem; color: #16161a; background: #ffd54a; border-radius: 999px; padding: 2px 10px; }
+.ob-note { margin: 2px 0 0; font-size: .8125rem; color: #aab0ba; line-height: 1.5; }

@@ -118,7 +118,8 @@
       offTake: "你收 ~${x}", offTime: "約 {m} 分鐘（接客 {p} + 車程 {t}）", offHour: "≈ 時薪 ${h}（按呢單 {m} 分鐘計）",
       offDisc: "已扣折扣 −${d}", offToll: "隧道費 ${x} 實報實銷，唔計入", offReq: "乘客要求",
       offPts: "+{p} 街坊分", offPtsNext: "接完 {a} 分 · 仲差 {n} 分升 Lv {l}", offPtsUp: "接完即升 Lv {l}！",
-      ptsWhy: { base: "完成", short: "短途", disc: "折扣單", nosur: "免附加費", pass: "優先卡", care: "照顧需要" },
+      ptsWhy: { base: "完成", short: "短途", disc: "折扣單", nosur: "免附加費", pass: "優先卡", care: "照顧需要", wait: "等候獎賞" },
+      boardTitle: "附近等緊嘅單 · 等得耐排先", boardWait: "等咗 {m} 分鐘", boardBonus: "等候獎賞 +{p} 分", boardPick: "睇單", boardNote: "單唔會自己消失；等得愈耐，接單獎賞愈多（每 5 分鐘 +5，最多 +30）。",
       dPtsDone: "+{p} 街坊分 · 而家 {a} 分",
       routeTitle: "行邊條路？", routeAuto: "畀師傅揀", routeAutoSub: "師傅行佢熟嘅路，唔使喺下面揀", routeCHT: "紅隧", routeEHC: "東隧", routeWHC: "西隧",
       routeShort: "最短路（慳錶）", routeNoToll: "唔行收費隧道", routeFast: "最快", routeMin: "約 {m} 分鐘",
@@ -430,7 +431,8 @@
       offTake: "You get ~${x}", offTime: "about {m} min ({p} to pickup + {t} trip)", offHour: "≈ ${h}/hour (based on this {m}-minute job)",
       offDisc: "after discount −${d}", offToll: "tolls ${x} passed through, not counted", offReq: "Passenger asks for",
       offPts: "+{p} 街坊分 points", offPtsNext: "after this: {a} points · {n} to Lv {l}", offPtsUp: "this trip takes you to Lv {l}!",
-      ptsWhy: { base: "trip", short: "short trip", disc: "discount", nosur: "no surcharges", pass: "priority pass", care: "extra care" },
+      ptsWhy: { base: "trip", short: "short trip", disc: "discount", nosur: "no surcharges", pass: "priority pass", care: "extra care", wait: "long wait" },
+      boardTitle: "Waiting nearby · longest wait first", boardWait: "waited {m} min", boardBonus: "wait bonus +{p} pts", boardPick: "View", boardNote: "Orders don't vanish; the longer a passenger waits, the bigger the reward for taking it (+5 every 5 minutes, up to +30).",
       dPtsDone: "+{p} 街坊分 points · now {a}",
       routeTitle: "Your route, your call", routeAuto: "Let the driver pick", routeAutoSub: "Your driver takes the way they know best", routeCHT: "Cross-Harbour Tunnel", routeEHC: "Eastern Harbour Crossing", routeWHC: "Western Harbour Crossing",
       routeShort: "Shortest (lower meter)", routeNoToll: "Avoid toll tunnels", routeFast: "fastest", routeMin: "about {m} min",
@@ -1987,8 +1989,27 @@
     return { from: byId("lp"), to: byId("air"), offer: "85", wait: "2:05", ready: false,
       needs: { zh: ["3 人", "尾箱行李 3 件", "有 BB 車"], en: ["3 people", "3 bags in boot", "Stroller"] }, lang: "Bahasa Indonesia", car: { zh: "大尾箱", en: "Big boot" }, carNeed: "boot", pay: "oct" };
   }
-  function showOffer() {
-    const j = D.job = nextJob(), q = baseQuote(j.from, j.to, new Set(["luggage"])), pr = priced(q, j.offer === "none" ? "meter" : "offer", new Set(j.offer === "none" ? [] : [j.offer]));
+  // waiting reward: +5 points for every 5 minutes waited, up to +30
+  const waitMinOf = j => { const m = String(j.wait || "0").split(":"); return parseInt(m[0], 10) || 0; };
+  const waitBonus = j => Math.min(30, Math.floor(waitMinOf(j) / 5) * 5);
+  function boardJobs() {
+    const mk = (f, to, w, pay) => ({ from: byId(f), to: byId(to), offer: "none", wait: w + ":00", ready: true, pay });
+    return [mk("cp", "qmh", 14, "oct"), mk("lp", "kt", 9, "alipay"), mk("pp", "hku", 4, "cash")]
+      .filter(j => j.from && j.to && !jobAvoided(j))
+      .sort((a, b) => waitMinOf(b) - waitMinOf(a));
+  }
+  function renderBoard() {
+    const box = $("#offerBoard"); if (!box) return;
+    const jobs = boardJobs(); D.board = jobs;
+    if (!jobs.length) { box.innerHTML = ""; return; }
+    box.innerHTML = `<div class="ob-head">${ic("clock")}<b>${t("boardTitle")}</b></div>` + jobs.map((j, i) => {
+      const q = baseQuote(j.from, j.to, new Set()), take = Math.round(q.meter + SUR.booking), b = waitBonus(j);
+      return `<button class="ob-row" data-board="${i}"><span class="ob-main"><b>${esc(lang === "en" ? j.from.en : j.from.zh)} → ${esc(lang === "en" ? j.to.en : j.to.zh)}</b><small>${t("boardWait", { m: waitMinOf(j) })}${b ? ` · <em>${t("boardBonus", { p: b })}</em>` : ""}</small></span><span class="ob-side">~$${take}<i>${t("boardPick")}</i></span></button>`;
+    }).join("") + `<p class="ob-note">${t("boardNote")}</p>`;
+  }
+  document.addEventListener("click", e => { const b = e.target.closest("[data-board]"); if (!b) return; const j = (D.board || [])[+b.dataset.board]; if (j) { stopDriverTimers(); showOffer(Object.assign({}, j)); const oc = document.querySelector(".offer-card"); if (oc) oc.scrollIntoView({ block: "start", behavior: "smooth" }); } });
+  function showOffer(chosen) {
+    const j = D.job = chosen || nextJob(), q = baseQuote(j.from, j.to, new Set(["luggage"])), pr = priced(q, j.offer === "none" ? "meter" : "offer", new Set(j.offer === "none" ? [] : [j.offer]));
     $("#offerMeta").textContent = t("offerMeta", j.short ? { km: "0.4", min: 2 } : { km: "1.2", min: 4 });
     // quick evaluation: take-home, time, hourly rate; tolls are passed through so they're not income
     {
@@ -2006,6 +2027,7 @@
       if (j.offer === "nosur") parts.push(["nosur", 10]);
       if (j.pass) parts.push(["pass", 15]);
       if (j.needs || j.senior || j.deaf) parts.push(["care", 10]);
+      if (waitBonus(j)) parts.push(["wait", waitBonus(j)]);
       const pts = parts.reduce((s, x) => s + x[1], 0), after = DPTS + pts, lvl = Math.floor(DPTS / 100) + 1, target = lvl * 100;
       j.pts = pts;
       const pctNow = Math.min(100, (DPTS % 100)), pctAfter = Math.min(100, after >= target ? 100 : after % 100);
@@ -2031,11 +2053,10 @@
     $("#offerDropZh").textContent = j.to.zh + enLine(j.to); $("#offerDropRoad").textContent = j.to.addrZh + (lang === "en" ? " · " + j.to.addrEn : "");
     $("#offerFoot").innerHTML = `${t("offerFare", { f: `${Math.round(pr.low)}–${Math.round(pr.high)}` })}<br><b class="${j.offer !== "none" ? "hl" : ""}">${j.offer === "85" ? t("offer85") : j.offer === "nosur" ? t("offerNoSur") : t("offerNone")}</b><br>${t("offerRider")} · 🧳 1`;
     dstep("offer");
-    let n = 15; $("#offerCountdown").textContent = n;
-    D.timers.push(setInterval(() => {
-      n--; $("#offerCountdown").textContent = n;
-      if (n <= 0) { stopDriverTimers(); dstep("idle"); D.timers.push(setTimeout(showOffer, 4000)); }
-    }, 1000));
+    renderBoard();
+    // demo: the offer stays until the driver taps accept or decline (the real app would give 15 seconds)
+    $("#offerCountdown").textContent = "15s";
+    $("#offerCountdown").title = lang === "en" ? "In the real app, drivers have 15 seconds to accept" : "真 App 會有 15 秒時間接單";
     speak(`有客！${j.from.zh}去${j.to.zh}。` + (j.route ? "乘客揀行" + routeLabel(j.route, T.zh) + "。" : "") + (j.needs ? "乘客備註：" + j.needs.zh.join("，") + "。" : "") + (j.lang ? "乘客唔講廣東話，訊息會翻譯同讀出。" : "") + (j.deaf ? "聽障乘客，請用訊息。" : ""));
   }
 
@@ -2297,6 +2318,13 @@
       if (changed) { renderLaunch(); if (typeof renderSign === "function") renderSign(); }
     });
   }
+
+  // reward / quest / perk texts: break only at punctuation so each idea stays together
+  const __renderPanelsOrig = renderPanels;
+  renderPanels = function () {
+    __renderPanelsOrig();
+    $$(".pcard .q-row > span, .pcard .perk span, .pcard .unlock > span, .pcard .badge span").forEach(el => { if (!el.querySelector(".phrase")) phraseWrap(el); });
+  };
 
   // ================================================================ boot
   buildPlanRows();
