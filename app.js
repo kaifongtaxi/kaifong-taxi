@@ -72,17 +72,17 @@
       etaBusy: "陳師傅送緊上一位乘客去{p}，落客後過嚟，約 {m} 分鐘到你度（地圖見到路線）",
       optRoute: "路線", optWhen: "時間", optPeople: "人數 · 行李", optNeeds: "車款同需要", optSave: "想慳啲？出個價", optPay: "俾錢", optFare: "車資同小費", optPreview: "車資明細",
       valNone: "冇特別", valMeter: "跟錶", valNow: "而家", valLater: "預約", valPax: "{n} 人", valBags: "{n} 件行李", valMore: "+{n} 項", valTip: "小費 ${n}", barPick: "揀咗目的地就見到車資",
-      sideRider: "試乘客版", sideDriver: "試師傅版", sideSoon: "登記即將開放", sideHint: "用電腦都睇得；用手機打開，體驗更好",
+      sideRider: "試乘客版", sideDriver: "試師傅版", demoLabel: "旁邊部手機試緊：", demoRider: "乘客版", demoDriver: "師傅版", sideSoon: "登記即將開放", sideHint: "用電腦都睇得；用手機打開，體驗更好",
       signTitle: "想第一批試？", signSub: "唔使俾錢、唔使下載。開始試用時，我哋會 WhatsApp 通知你。", signRider: "我係乘客，登記", signDriver: "我係師傅，登記",
       signSoon: "登記就快開放 🙏 遲啲再嚟睇吓", signNear: "或者用旁邊部手機即刻試 →", signBarTxt: "免費登記，開始試用即通知你", signBarBtn: "登記", sbRider: "我係乘客", sbDriver: "我係師傅",
       faqTitle: "常見問題", fbLink: "仲有問題或者想法？俾意見 →", fbSoon: "意見表就快開放 🙏 可以先電郵 kaifongtaxi@gmail.com",
       faq: [["有冇伏？", "師傅唔使俾佣，乘客冇每程收費；冇廣告、唔賣資料。"],
-            ["係咪呃人㗎？", "問得好。我哋永遠唔會問你攞錢、銀行資料、身份證或者驗證碼，亦唔會傳俾你要俾錢嘅連結。官方聯絡只有呢個網站同 kaifongtaxi@gmail.com。"],
+            ["係咪呃人㗎？", "問得好。而家完全唔使俾錢。將來就算收年費，都只會喺 App 入面俾；我哋絕對唔會私訊叫你轉數、傳俾你俾錢連結，亦唔會問你攞銀行資料、身份證或者驗證碼。官方聯絡只有呢個網站同 kaifongtaxi@gmail.com。"],
             ["點維持？", "起步免費；夠 1,000 個街坊先收每年 HK$30，用嚟交伺服器同地圖費，數目公開。"],
             ["有冇牌？", "只做持牌的士，唔涉及私家車。2025 年網約車條例嘅平台牌照，係管用私家車載客嘅平台；按條文，只做的士嘅平台唔喺呢個牌照範圍。"],
             ["會唔會又俾人收購？", "唔會賣。萬一有人想收購，或者我哋做唔落去，程式碼會全部公開，等街坊可以繼續用。"],
             ["幾時有得用？", "夠 10 位師傅同 100 個街坊登記就開始整，目標 2027 年 3 月 1 日試用。"]],
-      trustList: ["唔使俾錢，唔會問你攞銀行資料或驗證碼", "試用前最多 WhatsApp／電郵你 3 次", "想刪除？回覆「刪除」就得"],
+      trustList: ["登記唔使俾錢，唔會問你攞銀行資料或驗證碼", "試用前最多 WhatsApp／電郵你 3 次", "想刪除？回覆「刪除」就得"],
       storySign: "— Flo（發起人）",
       logTitle: "街坊的進度", logMoney: "開支 HK${s} · 收入 HK${i}", logMoneyNote: "網站用免費寄存；有開支會逐筆公開。", logNote: "每星期更新。",
       termsLink: "使用條款", termsTitle: "使用條款（示範版）", termsUpdated: "更新：2026 年 11 月 13 日",
@@ -389,17 +389,17 @@
       etaBusy: "Driver Chan is dropping off another passenger at {p}, then coming to you: about {m} min (route on the map)",
       optRoute: "Route", optWhen: "When", optPeople: "People & bags", optNeeds: "Taxi & needs", optSave: "Pay less? Make an offer", optPay: "Payment", optFare: "Fare & tip", optPreview: "Fare details & driver card",
       valNone: "None", valMeter: "Meter", valNow: "Now", valLater: "Booked", valPax: "{n} people", valBags: "{n} bags", valMore: "+{n} more", valTip: "tip ${n}", barPick: "Pick a destination to see the fare",
-      sideRider: "Try the passenger app", sideDriver: "Try the driver app", sideSoon: "Sign-up opening soon", sideHint: "Works on a computer; even better on your phone",
+      sideRider: "Try the passenger app", sideDriver: "Try the driver app", demoLabel: "The phone is showing:", demoRider: "Passenger", demoDriver: "Driver", sideSoon: "Sign-up opening soon", sideHint: "Works on a computer; even better on your phone",
       signTitle: "Want to be among the first?", signSub: "No payment, nothing to download. We'll message you on WhatsApp when the trial opens.", signRider: "Sign up as a passenger", signDriver: "Sign up as a driver",
       signSoon: "Sign-up opens very soon 🙏 please check back", signNear: "Or try the phone beside this, right now →", signBarTxt: "Sign up free, and we'll tell you when the trial opens", signBarBtn: "Sign up", sbRider: "Passenger", sbDriver: "Driver",
       faqTitle: "Questions", fbLink: "Other questions or ideas? Send feedback →", fbSoon: "The feedback form opens soon 🙏 meanwhile, email kaifongtaxi@gmail.com",
       faq: [["What's the catch?", "Drivers pay no commission and passengers pay nothing per trip. No ads, and we never sell your data."],
-            ["Is this a scam?", "Fair question. We'll never ask you for money, bank details, ID or verification codes, and we'll never send you a payment link. Our only official contacts are this site and kaifongtaxi@gmail.com."],
+            ["Is this a scam?", "Fair question. It's completely free right now. Even once the yearly fee starts, you'll only ever pay inside the app. We'll never message you asking for a transfer, never send you a payment link, and never ask for bank details, ID or verification codes. Our only official contacts are this site and kaifongtaxi@gmail.com."],
             ["How does it keep going?", "Free to start; a HK$30 yearly subscription only from 1,000 users, to pay for servers and maps. Every dollar is published."],
             ["Is it licensed?", "Licensed taxis only, no private cars. The 2025 ride-hailing law licenses platforms that carry passengers in private cars; on its wording, a taxi-only platform falls outside that licence."],
             ["Will it get bought and shut down too?", "It's not for sale. If anyone ever tries to buy it, or we can't carry on, the code will be published so the community can keep it running."],
             ["When can I use it?", "We start building once 10 drivers and 100 passengers sign up, aiming for a trial on 1 March 2027."]],
-      trustList: ["Free. We'll never ask for bank details or codes", "At most 3 messages before the trial", "Reply \"delete\" any time to be removed"],
+      trustList: ["Signing up is free. We'll never ask for bank details or codes", "At most 3 messages before the trial", "Reply \"delete\" any time to be removed"],
       storySign: "— Flo, who started 街坊的",
       logTitle: "Progress so far", logMoney: "Spent HK${s} · Income HK${i}", logMoneyNote: "The site runs on free hosting; any spending will be listed item by item.", logNote: "Updated every week.",
       termsLink: "Terms", termsTitle: "Terms of use (demo)", termsUpdated: "Updated 13 November 2026",
@@ -1078,9 +1078,15 @@
   });
 
   // ================================================================ navigation
+  function syncDemoSwitch() {
+    const v = ($(".view.active") || {}).id || "";
+    $$("#sideDemo [data-side]").forEach(b => { const on = v === "view-" + b.dataset.side; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false"); });
+  }
   function go(view) {
     $$(".view").forEach(v => v.classList.toggle("active", v.id === "view-" + view));
-    const shell = $(".app-shell"); if (shell) shell.scrollTop = 0; window.scrollTo(0, 0);
+    const shell = $(".app-shell"); if (shell) shell.scrollTop = 0;
+    if (!matchMedia("(min-width: 900px)").matches) window.scrollTo(0, 0);
+    setTimeout(syncDemoSwitch, 0);
     if (view === "rider") initRider();
     if (view !== "driver") stopDriverTimers();
   }
@@ -2312,7 +2318,9 @@
     const S = id => document.getElementById(id); if (!S("sideTitle")) return;
     S("sideTitle").textContent = t("heroTitle");
     S("sideCopy").textContent = t("heroLead");
-    S("sideCta").innerHTML = signBtns() + `<button class="side-near" data-side="rider">${t("signNear")}</button>`;
+    S("sideCta").innerHTML = signBtns();
+    const sd = S("sideDemo"); if (sd) sd.innerHTML = `<span>${t("demoLabel")}</span><div class="sd-seg" role="group"><button data-side="rider">${ic("user")}${t("demoRider")}</button><button data-side="driver">${ic("car")}${t("demoDriver")}</button></div>`;
+    syncDemoSwitch();
     S("sideStats").innerHTML = [["0%", t("statComm")], ["$0", t("statFee")], ["100%", t("statFare")]].map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join("");
     S("sideFeats").innerHTML = T[lang].features.map(([n, d]) => `<div class="sf"><b>${n}</b><span>${d}</span></div>`).join("");
     $$("#sideFeats .sf span").forEach(phraseWrap);

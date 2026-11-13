@@ -1450,7 +1450,7 @@ body.has-signbar #view-home { padding-bottom: 128px; }
 @media (min-width: 900px) {
   .device .app-shell { display: flex; flex-direction: column; }
   .device .app-shell > .view.active { flex: 1 0 auto; display: flex; flex-direction: column; }
-  .device .app-shell > .view.active > .tabbar { margin-top: auto; margin-bottom: 0; }
+  .device .app-shell > .view.active > .tabbar { margin: auto 0 0; width: 100%; align-self: stretch; }
 }
 @media (min-width: 900px) and (max-height: 779px) { .stage { padding-top: 12px; padding-bottom: 12px; } .device { margin-top: 4px; top: 8px; } }
 .priv-link.inline { display: inline; grid-column: auto; color: inherit; font-size: inherit; }
@@ -1548,4 +1548,16 @@ body.has-signbar .toast { bottom: 84px; }
 @media (min-width: 900px) {
   #homeLog { display: none; }
   .side-log { margin: 0 0 22px; padding: 18px 24px; background: #fff; border: 1px solid #e4e0d8; border-radius: 18px; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+}
+
+/* desktop: passenger / driver switch for the phone demo; stays in view while the panel scrolls */
+.side-demo { display: none; }
+@media (min-width: 900px) {
+  .side-demo { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; position: sticky; top: 12px; z-index: 20; width: fit-content; margin: 0 0 22px; padding: 8px 8px 8px 16px; border-radius: 999px; background: rgba(255,255,255,.94); border: 1px solid #e4e0d8; box-shadow: 0 6px 18px rgba(0,0,0,.08); backdrop-filter: blur(8px); }
+  .side-demo > span { color: #4a4f57; font-size: .9375rem; font-weight: 600; }
+  .sd-seg { display: inline-flex; padding: 3px; border-radius: 999px; background: #f0ede7; }
+  .sd-seg button { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 16px; border: 0; border-radius: 999px; background: transparent; color: #4a4f57; font: inherit; font-size: .9375rem; font-weight: 700; cursor: pointer; }
+  .sd-seg button svg { width: 16px; height: 16px; }
+  .sd-seg button.on { background: #16161a; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
+  .sd-seg button:focus-visible { outline: 3px solid rgba(200,16,46,.35); outline-offset: 2px; }
 }
