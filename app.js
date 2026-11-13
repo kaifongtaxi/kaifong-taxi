@@ -906,7 +906,7 @@
     const s = last.data.replace(/\s+$/, "");
     let cut;
     if (/[\u3000-\u9fff\uff00-\uffef]$/.test(s)) { let count = 0, i = s.length; while (i > 0 && count < 4) { i--; if (!/[\s。，、！？：；）」』….,!?)]/.test(s[i])) count++; } cut = i; }
-    else { const m = s.match(/(\S+\s+\S+)$/); cut = m ? s.length - m[1].length : 0; }
+    else { const m = s.match(/(\S+\s+\S+)$/); cut = m && m[1].length <= 18 ? s.length - m[1].length : 0; } // long English pairs (e.g. "favourite-driver priority") would overrun narrow rows
     if (cut > 0) {
       const span = document.createElement("span"); span.className = "nobr"; span.textContent = s.slice(cut);
       last.data = s.slice(0, cut); last.parentNode.insertBefore(span, last.nextSibling);
@@ -2266,16 +2266,29 @@
     const hf = $("#homeFaq"); if (hf) hf.innerHTML = faqHTML();
     const sf = $("#sideFaq"); if (sf) sf.innerHTML = faqHTML();
     const hs = $("#heroSign"); if (hs) hs.innerHTML = "";
-    const bar = $("#signBar"); if (bar) bar.innerHTML = `<div class="sb-text"><b>${t("signBarTxt")}</b><span class="sb-links"><a href="#" data-terms>${t("termsLink")}</a> · <a href="#" data-privacy>${t("privLink")}</a></span></div>
-      <div class="sb-btns"><a class="btn btn-primary" data-sign="rider" href="${CFG.riderFormUrl || "#"}" target="_blank" rel="noopener">${ic("user")}<span>${t("sbRider")}</span></a><a class="btn sb-alt" data-sign="driver" href="${CFG.driverFormUrl || "#"}" target="_blank" rel="noopener">${ic("car")}<span>${t("sbDriver")}</span></a></div>`;
+    const bar = $("#signBar"); if (bar) bar.innerHTML = `<div class="sb-btns"><a class="btn btn-primary" data-sign="rider" href="${CFG.riderFormUrl || "#"}" target="_blank" rel="noopener">${ic("user")}<span>${t("sbRider")}</span></a><a class="btn sb-alt" data-sign="driver" href="${CFG.driverFormUrl || "#"}" target="_blank" rel="noopener">${ic("car")}<span>${t("sbDriver")}</span></a></div>`;
     const n = (have, need) => `<div class="sg-prog"><div class="sg-bar"><i style="width:${Math.min(100, have / need * 100)}%"></i></div><span>${have} / ${need}</span></div>`;
-    const card = $("#sideSign");
-    if (card) card.innerHTML = `<h2>${t("signTitle")}</h2><p>${t("signSub")}</p><div class="sg-btns">${signBtns("big")}</div>
-      <div class="sg-progs"><div><b>${t("launchRiders")}</b>${n(CFG.ridersSignedUp || 0, CFG.buildRiders || 100)}</div><div><b>${t("launchDrivers")}</b>${n(CFG.driversSignedUp || 0, CFG.buildDrivers || 10)}</div></div>`;
+    const signCard = links => `<h2>${t("signTitle")}</h2><p>${t("signSub")}</p><div class="sg-btns">${signBtns("big")}</div>
+      <div class="sg-progs"><div><b>${t("launchRiders")}</b>${n(CFG.ridersSignedUp || 0, CFG.buildRiders || 100)}</div><div><b>${t("launchDrivers")}</b>${n(CFG.driversSignedUp || 0, CFG.buildDrivers || 10)}</div></div>` + (links ? `<p class="sg-links"><a href="#" data-terms>${t("termsLink")}</a> · <a href="#" data-privacy>${t("privLink")}</a></p>` : "");
+    const card = $("#sideSign"); if (card) card.innerHTML = signCard(false);
+    const hcard = $("#homeSign"); if (hcard) hcard.innerHTML = signCard(true);
   }
   // the sticky bar only shows on the phone home page
   function syncSignBar() { const bar = $("#signBar"); if (!bar) return; const home = $("#view-home"); const on = !!(home && home.classList.contains("active")); bar.classList.toggle("show", on); document.body.classList.toggle("has-signbar", on); }
   document.addEventListener("click", () => setTimeout(syncSignBar, 0));
+  (function barAutoHide() {
+    let lastY = window.scrollY, cardSeen = false;
+    const apply = away => { const bar = $("#signBar"); if (bar) bar.classList.toggle("away", away); };
+    window.addEventListener("scroll", () => {
+      const y = window.scrollY, dy = y - lastY;
+      if (Math.abs(dy) < 6) return;
+      apply(cardSeen || (dy > 0 && y > 120));
+      lastY = y;
+    }, { passive: true });
+    const watch = () => { const hc = $("#homeSign"); if (!hc || !("IntersectionObserver" in window)) return;
+      new IntersectionObserver(es => { cardSeen = es.some(e => e.isIntersecting); apply(cardSeen); }, { threshold: 0.15 }).observe(hc); };
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", watch); else watch();
+  })();
 
   // ---------------- desktop landing panel beside the phone frame
   function renderSide() {
@@ -2311,7 +2324,13 @@
   // ---------------- live sign-up counts from published "count" tabs (numbers only, no personal data)
   function loadCounts() {
     const get = url => url ? fetch(url + (url.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" }).then(r => r.text()).then(tx => { const n = parseInt(String(tx).replace(/[^0-9]/g, " ").trim().split(/\s+/)[0], 10); return isNaN(n) ? null : n; }).catch(() => null) : Promise.resolve(null);
-    const both = CFG.countCsv ? fetch(CFG.countCsv + (CFG.countCsv.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" }).then(r => r.text()).then(tx => { const nums = String(tx).split(/[^0-9]+/).filter(Boolean).map(Number); return [nums.length > 0 ? nums[0] : null, nums.length > 1 ? nums[1] : null]; }).catch(() => [null, null]) : null;
+    const both = CFG.countCsv ? fetch(CFG.countCsv + (CFG.countCsv.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" }).then(r => r.text()).then(tx => {
+      let r = null, dr = null; const rest = [];
+      String(tx).split(/\r?\n/).forEach(line => { const m = line.match(/(\d+)/); if (!m) return; const n = +m[1];
+        if (/driver|師傅|司機/i.test(line)) dr = n; else if (/passeng|rider|乘客|街坊/i.test(line)) r = n; else rest.push(...line.split(/[^0-9]+/).filter(Boolean).map(Number)); });
+      if (r === null && rest.length) r = rest.shift();
+      if (dr === null && rest.length) dr = rest.shift();
+      return [r, dr]; }).catch(() => [null, null]) : null;
     (both || Promise.all([get(CFG.riderCountCsv), get(CFG.driverCountCsv)])).then(([r, dr]) => {
       let changed = false;
       if (r !== null && r !== CFG.ridersSignedUp) { CFG.ridersSignedUp = r; changed = true; }

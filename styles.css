@@ -1493,3 +1493,32 @@ body.has-signbar .toast { bottom: 150px; }
 .ob-side { display: grid; justify-items: end; gap: 3px; font-weight: 800; white-space: nowrap; }
 .ob-side i { font-style: normal; font-size: .8125rem; color: #16161a; background: #ffd54a; border-radius: 999px; padding: 2px 10px; }
 .ob-note { margin: 2px 0 0; font-size: .8125rem; color: #aab0ba; line-height: 1.5; }
+
+/* sign-up bar v3 (Florence: the bar hid content): one compact row of two buttons; slides away while scrolling down,
+   returns on scroll up, and stays away while the in-page sign-up card is on screen */
+.sign-bar.show { grid-template-columns: 1fr; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); transform: translate(-50%, 0); transition: transform .25s ease, opacity .25s ease; }
+.sign-bar.show.away { transform: translate(-50%, 115%); opacity: 0; pointer-events: none; }
+.sb-btns .btn { min-height: 44px; }
+body.has-signbar #view-home { padding-bottom: 84px; }
+body.has-signbar .toast { bottom: 84px; }
+.home-sign { margin: 16px; padding: 20px; border-radius: 18px; background: #16161a; color: #fff; box-shadow: 0 12px 30px rgba(0,0,0,.18); }
+.home-sign:empty { display: none; }
+.home-sign h2 { margin: 0 0 6px; font-size: 1.375rem; }
+.home-sign > p { margin: 0 0 14px; color: #d6d8dd; line-height: 1.6; }
+.home-sign .sg-btns { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 16px; }
+.home-sign .sg-btns .btn { width: auto; min-height: 48px; justify-content: center; }
+.home-sign .sg-btns .sign-alt { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
+.home-sign .sg-progs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.home-sign .sg-progs b { font-size: .875rem; color: #c9ccd1; }
+.home-sign .sg-prog { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.home-sign .sg-bar { flex: 1; height: 8px; border-radius: 999px; background: rgba(255,255,255,.15); overflow: hidden; }
+.home-sign .sg-bar i { display: block; height: 100%; background: #ffd76a; }
+.home-sign .sg-prog span { font-size: .875rem; font-variant-numeric: tabular-nums; }
+.home-sign .sg-links { margin: 14px 0 0; font-size: .8125rem; color: #c9ccd1; }
+.home-sign .sg-links a { color: #c9ccd1; text-decoration: underline; }
+@media (max-width: 359px) { .home-sign .sg-progs { grid-template-columns: 1fr; } }
+@media (min-width: 900px) { .home-sign { display: none; } }
+@media (prefers-reduced-motion: reduce) { .sign-bar.show { transition: none; } }
+
+/* very small phones: two badge columns so long English badge names fit */
+@media (max-width: 359px) { .badge-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
