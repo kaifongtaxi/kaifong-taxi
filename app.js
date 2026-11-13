@@ -78,6 +78,16 @@
             ["點維持？", "起步免費；夠 1,000 個街坊先收每年 HK$30，用嚟交伺服器同地圖費，數目公開。"],
             ["有冇牌？", "只做持牌的士。正式開之前會搵律師同運輸署確認新例要求。"],
             ["幾時有得用？", "夠 10 位師傅同 100 個街坊登記就開始整，目標 2027 年 3 月 1 日試用。"]],
+      privLink: "私隱政策", privTitle: "私隱政策（示範版）", privUpdated: "更新：2026 年 11 月 13 日", privClose: "明白",
+      privBody: [
+        ["我哋係邊個", "「街坊的」係一個非牟利嘅社區項目，而家仲係示範版，冇真嘅預約、冇收錢。"],
+        ["示範版收集咩", "唔使登記，我哋唔會收你嘅名或電話。語言、付款方式、大字等設定只會儲喺你部手機（瀏覽器），我哋睇唔到。"],
+        ["「目前位置」", "只會喺你同意之後用，用嚟搵附近地址（會傳去 OpenStreetMap 嘅地址服務）；我哋唔會儲存你嘅位置。"],
+        ["用到嘅外部服務", "地圖：OpenStreetMap；路線：OSRM；地址：政府地址查詢服務、Photon；實時交通：運輸署開放數據；導航：Google 地圖／高德（你撳先會開）。呢啲服務各有自己嘅私隱政策。"],
+        ["登記表格", "表格（Google 表格）只收聯絡方法（WhatsApp 或電郵）同你自願答嘅問題，只用嚟通知你試用同問意見；唔會賣、唔會分享；項目停咗就全部刪除。"],
+        ["想刪除資料", "隨時話我哋知（回覆通知訊息，或者電郵 {mail}），我哋會刪除。"],
+        ["承諾", "冇廣告、唔賣資料。"]
+      ],
       locBtn: "目前位置", locFinding: "搵緊你嘅位置…", locDenied: "攞唔到你嘅位置，可以直接打地址", locAway: "你而家唔喺香港，示範用 IFC 做目前位置", locLabel: "目前位置",
       addAgreed: "已傾掂", addChanged: "同訂單唔同，乘客會見到", addLocked: "乘客出價免咗，唔可以加",
       spendTitle: "車費紀錄", spendMonth: "今個月", spendYear: "今年", spendAvg: "平均每程", spendSaved: "出價慳咗", spendTrips: "{n} 程",
@@ -368,6 +378,16 @@
             ["How does it keep going?", "Free to start; a HK$30 yearly subscription only from 1,000 users, to pay for servers and maps. Every dollar is published."],
             ["Is it licensed?", "Licensed taxis only. Before going live we'll confirm the new rules with a lawyer and the Transport Department."],
             ["When can I use it?", "We start building once 10 drivers and 100 passengers sign up, aiming for a trial on 1 March 2027."]],
+      privLink: "Privacy", privTitle: "Privacy policy (demo)", privUpdated: "Updated 13 November 2026", privClose: "Got it",
+      privBody: [
+        ["Who we are", "街坊的 (Kaifong Taxi) is a non-profit community project. It's a demo: no real bookings, no payments."],
+        ["What the demo collects", "No sign-up, and we don't collect your name or number. Settings such as language, payment method and large text stay on your phone (in your browser); we can't see them."],
+        ["Current location", "Used only after you allow it, to find a nearby address (sent to OpenStreetMap's address service). We don't store your location."],
+        ["Outside services", "Maps: OpenStreetMap. Routes: OSRM. Addresses: the government's Address Lookup Service and Photon. Live traffic: Transport Department open data. Navigation: Google Maps / Amap (only if you tap). Each has its own privacy policy."],
+        ["Sign-up forms", "The forms (Google Forms) only collect a contact (WhatsApp or email) and anything you choose to answer. We use them only to tell you about the trial and ask for feedback. We never sell or share them, and we delete everything if the project stops."],
+        ["Deleting your data", "Ask us any time (reply to our message, or email {mail}) and we'll delete it."],
+        ["Our promise", "No ads, and we never sell your data."]
+      ],
       locBtn: "Current location", locFinding: "Finding where you are…", locDenied: "Couldn't get your location, so please type the address", locAway: "You're not in Hong Kong right now, so the demo uses IFC as your location", locLabel: "Current location",
       addAgreed: "agreed", addChanged: "differs from the order; the passenger will see this", addLocked: "waived in the passenger's offer, can't be added",
       spendTitle: "What you've spent", spendMonth: "This month", spendYear: "This year", spendAvg: "Average per trip", spendSaved: "Saved with offers", spendTrips: "{n} trips",
@@ -851,7 +871,7 @@
   // No stray characters: keep the last 4 Chinese characters (or last 2 English words) of short text blocks together
   const NOWIDOW = "p, li, .stat-note, .fee-item span, .save-sub, .offer-tags .tag, .short-note.car span, .unlock span, .wall-msg, .impact-grid span, .milestone, .thanks-in span, .short-note.senior span, .saved-banner span, .rest-note span, .perk span, .q-row span, .lv-row span, .driver-line em, .short-note span, .disc-rule > span, .waived span, .pc-line, .pain-q span, .pain-a span, .fo-desc, .status-sub, .eta, .nearby span, .shift-hint span, .ready-note span, .shared-note span, .feat-desc, .lp-body > span, .offer-foot, .src-note span, .tip-note, .r-sub, .bubble, .msg-meta, .arrive-banner span, .pnote";
   function noWidow(el) {
-    if (el.dataset.nw === el.textContent) return;
+    if (el.dataset.nw === el.textContent && (el.dataset.nwcut === "0" || el.querySelector(".nobr"))) return;
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let last = null, n;
     while ((n = walker.nextNode())) if (n.data.trim()) last = n;
     if (!last || (last.parentElement && last.parentElement.classList.contains("nobr"))) { el.dataset.nw = el.textContent; return; }
@@ -863,6 +883,7 @@
       const span = document.createElement("span"); span.className = "nobr"; span.textContent = s.slice(cut);
       last.data = s.slice(0, cut); last.parentNode.insertBefore(span, last.nextSibling);
     }
+    el.dataset.nwcut = cut > 0 ? "1" : "0";
     el.dataset.nw = el.textContent;
   }
   let nwPending = false;
@@ -2176,14 +2197,26 @@
     if (!url) { e.preventDefault(); toast(t("signSoon")); }
   });
   function faqHTML() { return `<h2>${t("faqTitle")}</h2>` + T[lang].faq.map(([q, a]) => `<details class="faq-item"><summary>${q}</summary><p>${a}</p></details>`).join(""); }
+  function showPrivacy() {
+    const el = $("#privacyModal"); if (!el) return;
+    const mail = CFG.contactEmail || (lang === "en" ? "(email coming soon)" : "（電郵稍後公布）");
+    el.innerHTML = `<div class="pv-card" role="dialog" aria-modal="true" aria-label="${t("privTitle")}"><h2>${t("privTitle")}</h2>
+      ${T[lang].privBody.map(([h, p]) => `<h3>${h}</h3><p>${p.replace("{mail}", esc(mail))}</p>`).join("")}
+      <p class="pv-upd">${t("privUpdated")}</p><button class="btn btn-primary btn-block" data-act="closePriv">${t("privClose")}</button></div>`;
+    el.classList.remove("hidden");
+  }
+  document.addEventListener("click", e => {
+    if (e.target.closest("[data-privacy]")) { e.preventDefault(); showPrivacy(); return; }
+    if (e.target.closest("[data-act=closePriv]") || e.target.id === "privacyModal") $("#privacyModal").classList.add("hidden");
+  });
   function renderSign() {
     const hf = $("#homeFaq"); if (hf) hf.innerHTML = faqHTML();
     const sf = $("#sideFaq"); if (sf) sf.innerHTML = faqHTML();
-    const hs = $("#heroSign"); if (hs) hs.innerHTML = signBtns();
+    const hs = $("#heroSign"); if (hs) hs.innerHTML = signBtns() + `<a href="#" class="priv-link" data-privacy>${t("privLink")}</a>`;
     const bar = $("#signBar"); if (bar) bar.innerHTML = `<span>${t("signBarTxt")}</span><a class="btn btn-primary btn-sm" data-sign="rider" href="${CFG.riderFormUrl || "#"}" target="_blank" rel="noopener">${t("signBarBtn")}</a>`;
     const n = (have, need) => `<div class="sg-prog"><div class="sg-bar"><i style="width:${Math.min(100, have / need * 100)}%"></i></div><span>${have} / ${need}</span></div>`;
     const card = $("#sideSign");
-    if (card) card.innerHTML = `<h2>${t("signTitle")}</h2><p>${t("signSub")}</p><div class="sg-btns">${signBtns("big")}</div>
+    if (card) card.innerHTML = `<h2>${t("signTitle")}</h2><p>${t("signSub")}</p><div class="sg-btns">${signBtns("big")}</div><a href="#" class="priv-link light" data-privacy>${t("privLink")}</a>
       <div class="sg-progs"><div><b>${t("launchRiders")}</b>${n(CFG.ridersSignedUp || 0, CFG.buildRiders || 100)}</div><div><b>${t("launchDrivers")}</b>${n(CFG.driversSignedUp || 0, CFG.buildDrivers || 10)}</div></div>`;
   }
   // the sticky bar only shows on the phone home page
@@ -2195,7 +2228,7 @@
     const S = id => document.getElementById(id); if (!S("sideTitle")) return;
     S("sideTitle").textContent = t("heroTitle");
     S("sideCopy").textContent = t("heroLead");
-    S("sideCta").innerHTML = signBtns() + `<button class="side-near" data-side="rider">${t("signNear")}</button>`;
+    S("sideCta").innerHTML = signBtns() + `<button class="side-near" data-side="rider">${t("signNear")}</button><a href="#" class="priv-link" data-privacy>${t("privLink")}</a>`;
     S("sideStats").innerHTML = [["0%", t("statComm")], ["$0", t("statFee")], ["100%", t("statFare")]].map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join("");
     S("sideFeats").innerHTML = T[lang].features.map(([n, d]) => `<div class="sf"><b>${n}</b><span>${d}</span></div>`).join("");
     S("sideStory").innerHTML = `<h2>${t("storyTitle")}</h2><p>${t("story1")}</p><p>${t("story2")}</p><p class="side-punch">${t("story3")}</p>`;
