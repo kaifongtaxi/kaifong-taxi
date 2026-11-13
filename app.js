@@ -79,6 +79,7 @@
       faq: [["有冇伏？", "師傅唔使俾佣，乘客冇每程收費；冇廣告、唔賣資料。"],
             ["點維持？", "起步免費；夠 1,000 個街坊先收每年 HK$30，用嚟交伺服器同地圖費，數目公開。"],
             ["有冇牌？", "只做持牌的士，唔涉及私家車。按 2025 年網約車條例，平台牌照係管私家車載客；只做的士嘅平台唔使呢個牌。"],
+            ["會唔會又俾人收購？", "唔會賣。萬一有人想收購，或者我哋做唔落去，程式碼會全部公開，等街坊可以繼續用。"],
             ["幾時有得用？", "夠 10 位師傅同 100 個街坊登記就開始整，目標 2027 年 3 月 1 日試用。"]],
       privLink: "私隱政策", privTitle: "私隱政策（示範版）", privUpdated: "更新：2026 年 11 月 13 日", privClose: "明白",
       privBody: [
@@ -379,6 +380,7 @@
       faq: [["What's the catch?", "Drivers pay no commission and passengers pay nothing per trip. No ads, and we never sell your data."],
             ["How does it keep going?", "Free to start; a HK$30 yearly subscription only from 1,000 users, to pay for servers and maps. Every dollar is published."],
             ["Is it licensed?", "Licensed taxis only, no private cars. Under the 2025 ride-hailing law, platform licences cover private cars carrying passengers; a taxi-only platform doesn't need one."],
+            ["Will it get bought and shut down too?", "It's not for sale. If anyone ever tries to buy it, or we can't carry on, the code will be published so the community can keep it running."],
             ["When can I use it?", "We start building once 10 drivers and 100 passengers sign up, aiming for a trial on 1 March 2027."]],
       privLink: "Privacy", privTitle: "Privacy policy (demo)", privUpdated: "Updated 13 November 2026", privClose: "Got it",
       privBody: [
