@@ -1071,22 +1071,12 @@
     setPaxLang(b.dataset.lang, false);
   });
   // first visit: follow the phone's language (tourists and other non-Cantonese phones get their language, else English); later visits: remember the choice
+  // Chinese (Cantonese) by default for everyone; only a choice made in the language menu changes it (and is remembered)
   function detectLang() {
     try { const s = localStorage.getItem("kaifong-lang"); if (s && LANG_SHORT[s]) return s; } catch (e) {}
-    const list = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"]).map(x => String(x).toLowerCase());
-    // Hong Kong phones (Cantonese, or English set up in HK) start in Cantonese; visitors' phones don't
-    if (list.some(l => /^(zh|yue|en)-(hk|mo)$|^zh-hant-(hk|mo)$|^yue/.test(l))) return "zh";
-    for (const l of list) {
-      if (/^zh-(tw|hant)/.test(l)) return "cmn-t";
-      if (/^zh/.test(l)) return "cmn-s";
-      if (/^en/.test(l)) return "en";
-      const two = l.slice(0, 2);
-      if (two === "id" || two === "ms") return "id";
-      if (two === "tl" || l.startsWith("fil")) return "tl";
-      if (["ur", "ne", "hi"].includes(two)) return two;
-    }
-    return "en";
+    return "zh";
   }
+
   function setPaxLang(code, quiet) {
     paxLang = code;
     try { localStorage.setItem("kaifong-lang", code); } catch (e) {}
