@@ -77,10 +77,14 @@
       signSoon: "登記就快開放 🙏 遲啲再嚟睇吓", signNear: "或者用旁邊部手機即刻試 →", signBarTxt: "免費登記，開始試用即通知你", signBarBtn: "登記", sbRider: "我係乘客", sbDriver: "我係師傅",
       faqTitle: "常見問題", fbLink: "仲有問題或者想法？俾意見 →", fbSoon: "意見表就快開放 🙏 可以先電郵 kaifongtaxi@gmail.com",
       faq: [["有冇伏？", "師傅唔使俾佣，乘客冇每程收費；冇廣告、唔賣資料。"],
+            ["係咪呃人㗎？", "問得好。我哋永遠唔會問你攞錢、銀行資料、身份證或者驗證碼，亦唔會傳俾你要俾錢嘅連結。官方聯絡只有呢個網站同 kaifongtaxi@gmail.com。"],
             ["點維持？", "起步免費；夠 1,000 個街坊先收每年 HK$30，用嚟交伺服器同地圖費，數目公開。"],
             ["有冇牌？", "只做持牌的士，唔涉及私家車。2025 年網約車條例嘅平台牌照，係管用私家車載客嘅平台；按條文，只做的士嘅平台唔喺呢個牌照範圍。"],
             ["會唔會又俾人收購？", "唔會賣。萬一有人想收購，或者我哋做唔落去，程式碼會全部公開，等街坊可以繼續用。"],
             ["幾時有得用？", "夠 10 位師傅同 100 個街坊登記就開始整，目標 2027 年 3 月 1 日試用。"]],
+      trustList: ["唔使俾錢，唔會問你攞銀行資料或驗證碼", "試用前最多 WhatsApp／電郵你 3 次", "想刪除？回覆「刪除」就得"],
+      storySign: "— Flo（發起人）",
+      logTitle: "街坊的進度", logMoney: "開支 HK${s} · 收入 HK${i}", logMoneyNote: "網站用免費寄存；有開支會逐筆公開。", logNote: "每星期更新。",
       termsLink: "使用條款", termsTitle: "使用條款（示範版）", termsUpdated: "更新：2026 年 11 月 13 日",
       termsBody: [
         ["我哋嘅角色", "「街坊的」係一個社區項目（未註冊公司或慈善團體），只係提供平台畀乘客同持牌的士司機互相聯絡。我哋唔擁有、唔營運任何的士，亦唔係車程合約嘅一方：每一程車都係乘客同司機之間直接嘅協議。"],
@@ -98,7 +102,7 @@
         ["示範版收集咩", "唔使登記，我哋唔會收你嘅名或電話。語言、付款方式、大字等設定只會儲喺你部手機（瀏覽器），我哋睇唔到。"],
         ["「目前位置」", "只會喺你同意之後用，用嚟搵附近地址（會傳去 OpenStreetMap 嘅地址服務）；我哋唔會儲存你嘅位置。"],
         ["用到嘅外部服務", ["網站寄存：GitHub Pages", "地圖：OpenStreetMap（地圖程式經 unpkg 載入）", "路線：OSRM", "地址搜尋：政府地址查詢服務", "「目前位置」轉地址：OpenStreetMap Nominatim", "實時交通：運輸署開放數據", "翻譯：MyMemory（只會傳送要翻譯嘅字）", "繁簡轉換：程式經 jsDelivr 載入", "語音輸入：用你瀏覽器內置功能（有啲瀏覽器會將錄音交俾瀏覽器公司處理）", "導航：Google 地圖／高德（你撳先會開）"], "呢啲服務各有自己嘅私隱政策。"],
-        ["登記表格", "表格（Google 表格）只收聯絡方法（WhatsApp 或電郵）同你自願答嘅問題，只用嚟通知你試用同問意見；唔會賣、唔會分享；項目停咗就全部刪除。"],
+        ["登記表格", "表格（Google 表格）只收聯絡方法（WhatsApp 或電郵）同你自願答嘅問題，只用嚟通知你試用同問意見（試用前最多 3 次）；唔會賣、唔會分享；回覆「刪除」就即刻刪，項目停咗亦會全部刪除。"],
         ["想刪除資料", "隨時話我哋知（回覆通知訊息，或者電郵 {mail}），我哋會刪除。"],
         ["承諾", "冇廣告、唔賣資料。"]
       ],
@@ -390,10 +394,14 @@
       signSoon: "Sign-up opens very soon 🙏 please check back", signNear: "Or try the phone beside this, right now →", signBarTxt: "Sign up free, and we'll tell you when the trial opens", signBarBtn: "Sign up", sbRider: "Passenger", sbDriver: "Driver",
       faqTitle: "Questions", fbLink: "Other questions or ideas? Send feedback →", fbSoon: "The feedback form opens soon 🙏 meanwhile, email kaifongtaxi@gmail.com",
       faq: [["What's the catch?", "Drivers pay no commission and passengers pay nothing per trip. No ads, and we never sell your data."],
+            ["Is this a scam?", "Fair question. We'll never ask you for money, bank details, ID or verification codes, and we'll never send you a payment link. Our only official contacts are this site and kaifongtaxi@gmail.com."],
             ["How does it keep going?", "Free to start; a HK$30 yearly subscription only from 1,000 users, to pay for servers and maps. Every dollar is published."],
             ["Is it licensed?", "Licensed taxis only, no private cars. The 2025 ride-hailing law licenses platforms that carry passengers in private cars; on its wording, a taxi-only platform falls outside that licence."],
             ["Will it get bought and shut down too?", "It's not for sale. If anyone ever tries to buy it, or we can't carry on, the code will be published so the community can keep it running."],
             ["When can I use it?", "We start building once 10 drivers and 100 passengers sign up, aiming for a trial on 1 March 2027."]],
+      trustList: ["Free. We'll never ask for bank details or codes", "At most 3 messages before the trial", "Reply \"delete\" any time to be removed"],
+      storySign: "— Flo, who started 街坊的",
+      logTitle: "Progress so far", logMoney: "Spent HK${s} · Income HK${i}", logMoneyNote: "The site runs on free hosting; any spending will be listed item by item.", logNote: "Updated every week.",
       termsLink: "Terms", termsTitle: "Terms of use (demo)", termsUpdated: "Updated 13 November 2026",
       termsBody: [
         ["Our role", "街坊的 is a community project (not a registered company or charity) that only helps passengers and licensed taxi drivers connect. We don't own or run taxis and we're not a party to any trip: each trip is an agreement directly between the passenger and the driver."],
@@ -411,7 +419,7 @@
         ["What the demo collects", "No sign-up, and we don't collect your name or number. Settings such as language, payment method and large text stay on your phone (in your browser); we can't see them."],
         ["Current location", "Used only after you allow it, to find a nearby address (sent to OpenStreetMap's address service). We don't store your location."],
         ["Outside services", ["Hosting: GitHub Pages", "Maps: OpenStreetMap (map code loaded from unpkg)", "Routes: OSRM", "Address search: the government's Address Lookup Service", "“Current location” to address: OpenStreetMap Nominatim", "Live traffic: Transport Department open data", "Translation: MyMemory (only the text being translated is sent)", "Chinese script conversion: code loaded from jsDelivr", "Voice input: your browser's built-in feature (some browsers send the audio to the browser maker to process)", "Navigation: Google Maps / Amap (only if you tap)"], "Each has its own privacy policy."],
-        ["Sign-up forms", "The forms (Google Forms) only collect a contact (WhatsApp or email) and anything you choose to answer. We use them only to tell you about the trial and ask for feedback. We never sell or share them, and we delete everything if the project stops."],
+        ["Sign-up forms", "The forms (Google Forms) only collect a contact (WhatsApp or email) and anything you choose to answer. We use them only to tell you about the trial and ask for feedback (at most 3 messages before the trial). We never sell or share them. Reply “delete” and we remove you straight away; we also delete everything if the project stops."],
         ["Deleting your data", "Ask us any time (reply to our message, or email {mail}) and we'll delete it."],
         ["Our promise", "No ads, and we never sell your data."]
       ],
@@ -879,7 +887,15 @@
     const d = new Date(s + "T00:00:00+08:00");
     return isNaN(d) ? s : d.toLocaleDateString(lang === "zh" ? "zh-HK" : "en-GB", { year: "numeric", month: "long", day: "numeric" });
   }
+  function renderLog() {
+    const items = CFG.progress || []; if (!items.length) return;
+    const short = s => { const d = new Date(s + "T00:00:00+08:00"); if (isNaN(d)) return s; return lang === "zh" ? `${d.getMonth() + 1} 月 ${d.getDate()} 日` : d.toLocaleDateString("en-GB", { day: "numeric", month: "short" }); };
+    const html = `<h2>${t("logTitle")}</h2><ol class="log-list">${items.map(x => `<li><time>${short(x.date)}</time><span>${esc(lang === "en" ? x.en : x.zh)}</span></li>`).join("")}</ol>
+      <div class="log-money"><b>${t("logMoney", { s: (CFG.spentHKD || 0).toLocaleString("en-HK"), i: (CFG.incomeHKD || 0).toLocaleString("en-HK") })}</b><span>${t("logMoneyNote")}</span></div><p class="log-note">${t("logNote")}</p>`;
+    ["homeLog", "sideLog"].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = html; });
+  }
   function renderLaunch() {
+    renderLog();
     const c = CFG, box = $("#launchBox"); if (!box) return;
     const dr = c.driversSignedUp || 0, rr = c.ridersSignedUp || 0;
     const bar = (have, need, lbl) => {
@@ -2268,7 +2284,8 @@
     const hs = $("#heroSign"); if (hs) hs.innerHTML = "";
     const bar = $("#signBar"); if (bar) bar.innerHTML = `<div class="sb-btns"><a class="btn btn-primary" data-sign="rider" href="${CFG.riderFormUrl || "#"}" target="_blank" rel="noopener">${ic("user")}<span>${t("sbRider")}</span></a><a class="btn sb-alt" data-sign="driver" href="${CFG.driverFormUrl || "#"}" target="_blank" rel="noopener">${ic("car")}<span>${t("sbDriver")}</span></a></div>`;
     const n = (have, need) => `<div class="sg-prog"><div class="sg-bar"><i style="width:${Math.min(100, have / need * 100)}%"></i></div><span>${have} / ${need}</span></div>`;
-    const signCard = links => `<h2>${t("signTitle")}</h2><p>${t("signSub")}</p><div class="sg-btns">${signBtns("big")}</div>
+    const trust = `<ul class="sg-trust">${T[lang].trustList.map(x => `<li>${x}</li>`).join("")}</ul>`;
+    const signCard = links => `<h2>${t("signTitle")}</h2><p>${t("signSub")}</p><div class="sg-btns">${signBtns("big")}</div>${trust}
       <div class="sg-progs"><div><b>${t("launchRiders")}</b>${n(CFG.ridersSignedUp || 0, CFG.buildRiders || 100)}</div><div><b>${t("launchDrivers")}</b>${n(CFG.driversSignedUp || 0, CFG.buildDrivers || 10)}</div></div>` + (links ? `<p class="sg-links"><a href="#" data-terms>${t("termsLink")}</a> · <a href="#" data-privacy>${t("privLink")}</a></p>` : "");
     const card = $("#sideSign"); if (card) card.innerHTML = signCard(false);
     const hcard = $("#homeSign"); if (hcard) hcard.innerHTML = signCard(true);
@@ -2299,7 +2316,7 @@
     S("sideStats").innerHTML = [["0%", t("statComm")], ["$0", t("statFee")], ["100%", t("statFare")]].map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join("");
     S("sideFeats").innerHTML = T[lang].features.map(([n, d]) => `<div class="sf"><b>${n}</b><span>${d}</span></div>`).join("");
     $$("#sideFeats .sf span").forEach(phraseWrap);
-    S("sideStory").innerHTML = `<h2>${t("storyTitle")}</h2><p>${t("story1")}</p><p>${t("story2")}</p><p class="side-punch">${t("story3")}</p>`;
+    S("sideStory").innerHTML = `<h2>${t("storyTitle")}</h2><p>${t("story1")}</p><p>${t("story2")}</p><p class="side-punch">${t("story3")}</p><p class="side-signoff">${t("storySign")}</p>`;
     const pl = (title, list) => `<div class="sp-col"><h3>${title}</h3>${list.map(([q, a]) => `<div class="sp-row"><span class="sp-q">${q}</span><span class="sp-a">${a}</span></div>`).join("")}</div>`;
     S("sidePains").innerHTML = `<h2>${t("painTitle")}</h2><div class="sp-grid">${pl(T[lang].whyRiderTitle, T[lang].painsRider)}${pl(T[lang].whyDriverTitle.replace(/\s*\(.*\)$/, ""), T[lang].painsDriver)}</div>`;
 

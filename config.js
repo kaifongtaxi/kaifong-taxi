@@ -10,6 +10,14 @@ window.KAIFONG_CONFIG = {
   countCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vT04ZsNsAS3sy-QORRqa_ADOtOYY4HL88VStb5ppM1uHEiacRZf0G5v1So2o-WW226FiLiIQNHSCUJ3/pub?gid=0&single=true&output=csv",
   riderCountCsv: "",
   driverCountCsv: "",
+  // Public progress log (newest first) and running totals, shown on the site. Update weekly.
+  progress: [
+    { date: "2026-11-13", zh: "開始同第一批街坊分享，睇吓邊個想一齊做", en: "Started sharing with the first neighbours to see who wants to join" },
+    { date: "2026-11-13", zh: "私隱政策、使用條款同俾意見表格上線", en: "Added the privacy policy, terms of use and a feedback form" },
+    { date: "2026-11-13", zh: "示範版上線，乘客同師傅登記表開放", en: "Demo went live; passenger and driver sign-up forms opened" }
+  ],
+  spentHKD: 0,
+  incomeHKD: 0,
   feedbackFormUrl: "https://forms.gle/CQHRyohfGWj1SUxF7",
   contactEmail: "kaifongtaxi@gmail.com",
 
