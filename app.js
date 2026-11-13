@@ -2311,7 +2311,8 @@
   // ---------------- live sign-up counts from published "count" tabs (numbers only, no personal data)
   function loadCounts() {
     const get = url => url ? fetch(url + (url.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" }).then(r => r.text()).then(tx => { const n = parseInt(String(tx).replace(/[^0-9]/g, " ").trim().split(/\s+/)[0], 10); return isNaN(n) ? null : n; }).catch(() => null) : Promise.resolve(null);
-    Promise.all([get(CFG.riderCountCsv), get(CFG.driverCountCsv)]).then(([r, dr]) => {
+    const both = CFG.countCsv ? fetch(CFG.countCsv + (CFG.countCsv.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" }).then(r => r.text()).then(tx => { const nums = String(tx).split(/[^0-9]+/).filter(Boolean).map(Number); return [nums.length > 0 ? nums[0] : null, nums.length > 1 ? nums[1] : null]; }).catch(() => [null, null]) : null;
+    (both || Promise.all([get(CFG.riderCountCsv), get(CFG.driverCountCsv)])).then(([r, dr]) => {
       let changed = false;
       if (r !== null && r !== CFG.ridersSignedUp) { CFG.ridersSignedUp = r; changed = true; }
       if (dr !== null && dr !== CFG.driversSignedUp) { CFG.driversSignedUp = dr; changed = true; }

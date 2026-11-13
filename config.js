@@ -6,6 +6,8 @@ window.KAIFONG_CONFIG = {
   driverFormUrl: "https://forms.gle/KmXADjk5oKDaN9NS6",
   // Live sign-up counts: publish ONLY a "count" tab of each responses sheet as CSV (File > Share > Publish to web)
   // and paste the link here. The tab must contain just the number (e.g. =COUNTA('Form Responses 1'!A2:A)).
+  // One published "count" tab: A1 = passenger sign-ups, B1 = driver sign-ups (numbers only).
+  countCsv: "",
   riderCountCsv: "",
   driverCountCsv: "",
   feedbackFormUrl: "https://forms.gle/CQHRyohfGWj1SUxF7",
