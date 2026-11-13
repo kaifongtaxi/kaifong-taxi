@@ -83,7 +83,7 @@
             ["會唔會又俾人收購？", "唔會賣。萬一有人想收購，或者我哋做唔落去，程式碼會全部公開，等街坊可以繼續用。"],
             ["幾時有得用？", "夠 10 位師傅同 100 個街坊登記就開始整，目標 2027 年 3 月 1 日試用。"]],
       trustList: ["登記唔使俾錢，唔會問你攞銀行資料或驗證碼", "試用前最多 WhatsApp／電郵你 3 次", "想刪除？回覆「刪除」就得"],
-      storySign: "— 一個街坊（發起人）",
+      storySign: "— Flo（發起人）",
       logTitle: "街坊的進度", logMoney: "開支 HK${s} · 收入 HK${i}", logMoneyNote: "網站用免費寄存；有開支會逐筆公開。", logNote: "每星期更新。",
       termsLink: "使用條款", termsTitle: "使用條款（示範版）", termsUpdated: "更新：2026 年 11 月 13 日",
       termsBody: [
@@ -400,7 +400,7 @@
             ["Will it get bought and shut down too?", "It's not for sale. If anyone ever tries to buy it, or we can't carry on, the code will be published so the community can keep it running."],
             ["When can I use it?", "We start building once 10 drivers and 100 passengers sign up, aiming for a trial on 1 March 2027."]],
       trustList: ["Signing up is free. We'll never ask for bank details or codes", "At most 3 messages before the trial", "Reply \"delete\" any time to be removed"],
-      storySign: "— a neighbour who started 街坊的",
+      storySign: "— Flo, who started 街坊的",
       logTitle: "Progress so far", logMoney: "Spent HK${s} · Income HK${i}", logMoneyNote: "The site runs on free hosting; any spending will be listed item by item.", logNote: "Updated every week.",
       termsLink: "Terms", termsTitle: "Terms of use (demo)", termsUpdated: "Updated 13 November 2026",
       termsBody: [
