@@ -73,7 +73,7 @@
       optRoute: "路線", optWhen: "時間", optPeople: "人數 · 行李", optNeeds: "車款同需要", optSave: "想慳啲？出個價", optPay: "俾錢", optFare: "車資同小費", optPreview: "車資明細",
       valNone: "冇特別", valMeter: "跟錶", valNow: "而家", valLater: "預約", valPax: "{n} 人", valBags: "{n} 件行李", valMore: "+{n} 項", valTip: "小費 ${n}", barPick: "揀咗目的地就見到車資",
       sideRider: "試乘客版", sideDriver: "試師傅版", sideSoon: "登記即將開放", sideHint: "用電腦都睇得；用手機打開，體驗更好",
-      signTitle: "想第一批試？", signSub: "唔使俾錢、唔使下載。開始試用時，我哋會 WhatsApp 通知你。", signRider: "我係乘客，登記", signDriver: "我係司機，登記",
+      signTitle: "想第一批試？", signSub: "唔使俾錢、唔使下載。開始試用時，我哋會 WhatsApp 通知你。", signRider: "我係乘客，登記", signDriver: "我係師傅，登記",
       signSoon: "登記就快開放 🙏 遲啲再嚟睇吓", signNear: "或者用旁邊部手機即刻試 →", signBarTxt: "免費登記，開始試用即通知你", signBarBtn: "登記", sbRider: "我係乘客", sbDriver: "我係師傅",
       faqTitle: "常見問題", fbLink: "仲有問題或者想法？俾意見 →", fbSoon: "意見表就快開放 🙏 可以先電郵 kaifongtaxi@gmail.com",
       faq: [["有冇伏？", "師傅唔使俾佣，乘客冇每程收費；冇廣告、唔賣資料。"],
@@ -2218,7 +2218,7 @@
     const url = a.dataset.sign === "rider" ? CFG.riderFormUrl : CFG.driverFormUrl;
     if (!url) { e.preventDefault(); toast(t("signSoon")); }
   });
-  function faqHTML() { return `<h2>${t("faqTitle")}</h2>` + T[lang].faq.map(([q, a]) => `<details class="faq-item"><summary>${q}</summary><p>${a}</p></details>`).join("") + `<a class="faq-fb" data-feedback href="${CFG.feedbackFormUrl || "#"}" target="_blank" rel="noopener">${t("fbLink")}</a><p class="faq-legal"><a href="#" data-terms>${t("termsLink")}</a> · <a href="#" data-privacy>${t("privLink")}</a></p>`; }
+  function faqHTML() { return `<h2>${t("faqTitle")}</h2>` + T[lang].faq.map(([q, a]) => `<details class="faq-item"><summary>${q}</summary><p>${a}</p></details>`).join("") + `<a class="faq-fb" data-feedback href="${CFG.feedbackFormUrl || "#"}" target="_blank" rel="noopener">${t("fbLink")}</a>`; }
   document.addEventListener("click", e => { const a = e.target.closest("[data-feedback]"); if (!a) return; if (!CFG.feedbackFormUrl) { e.preventDefault(); toast(t("fbSoon")); } });
   function showTerms() {
     const el = $("#privacyModal"); if (!el) return;
@@ -2249,7 +2249,7 @@
       <div class="sb-btns"><a class="btn btn-primary" data-sign="rider" href="${CFG.riderFormUrl || "#"}" target="_blank" rel="noopener">${ic("user")}<span>${t("sbRider")}</span></a><a class="btn sb-alt" data-sign="driver" href="${CFG.driverFormUrl || "#"}" target="_blank" rel="noopener">${ic("car")}<span>${t("sbDriver")}</span></a></div>`;
     const n = (have, need) => `<div class="sg-prog"><div class="sg-bar"><i style="width:${Math.min(100, have / need * 100)}%"></i></div><span>${have} / ${need}</span></div>`;
     const card = $("#sideSign");
-    if (card) card.innerHTML = `<h2>${t("signTitle")}</h2><p>${t("signSub")}</p><div class="sg-btns">${signBtns("big")}</div><span class="priv-link light"><a href="#" data-terms>${t("termsLink")}</a> · <a href="#" data-privacy>${t("privLink")}</a></span>
+    if (card) card.innerHTML = `<h2>${t("signTitle")}</h2><p>${t("signSub")}</p><div class="sg-btns">${signBtns("big")}</div>
       <div class="sg-progs"><div><b>${t("launchRiders")}</b>${n(CFG.ridersSignedUp || 0, CFG.buildRiders || 100)}</div><div><b>${t("launchDrivers")}</b>${n(CFG.driversSignedUp || 0, CFG.buildDrivers || 10)}</div></div>`;
   }
   // the sticky bar only shows on the phone home page
