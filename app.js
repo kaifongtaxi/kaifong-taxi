@@ -8,6 +8,8 @@
   const TARIFF = window.KAIFONG_TARIFF;
   const SUR = window.KAIFONG_SURCHARGE;
   let DPTS = 640; // driver's 街坊分 in the demo; Lv 8 at 700
+  const FEAT = window.KAIFONG_FEATURES || {};
+  const OFFERS = FEAT.offers === true, FIXED = FEAT.fixedPrice === true;
   const DISC = window.KAIFONG_DISCOUNT || { rate: 0.85, maxOff: 60, floor: { red: 90, green: 80, blue: 80 } };
   // discount rules: below the floor = meter; floor..floor/0.85 = flat floor; above = 85% (max maxOff off)
   function discountOf(meter, colour) {
@@ -37,7 +39,7 @@
       story3: "所以我呢個小薯仔學 vibe coding，整咗「街坊的」：唔抽佣、規則公開、街坊幫街坊。",
       painTitle: "你嘅煩惱，街坊的點解決", painRiderTab: "🙋 乘客", painDriverTab: "🚕 師傅",
       whyRiderTitle: "乘客",
-      whyR1: "起步免費，冇每程收費；想慳可以出價八五折、免附加費",
+      whyR1: "起步免費，冇每程收費；跟錶收費，附加費逐項列明",
       whyR2: "講你嘅語言：打字或者直接講，自動翻譯，用廣東話讀畀師傅聽",
       whyR3: "揀幾時準備好，實況等候時間，唔會「保證」呃你",
       whyR4: "長者、BB 車、輪椅、行李多？一撳就話畀師傅知",
@@ -72,11 +74,11 @@
       valNone: "冇特別", valMeter: "跟錶", valNow: "而家", valLater: "預約", valPax: "{n} 人", valBags: "{n} 件行李", valMore: "+{n} 項", valTip: "小費 ${n}", barPick: "揀咗目的地就見到車資",
       sideRider: "試乘客版", sideDriver: "試師傅版", sideSoon: "登記即將開放", sideHint: "用電腦都睇得；用手機打開，體驗更好",
       signTitle: "想第一批試？", signSub: "唔使俾錢、唔使下載。開始試用時，我哋會 WhatsApp 通知你。", signRider: "我係乘客，登記", signDriver: "我係司機，登記",
-      signSoon: "登記就快開放 🙏 遲啲再嚟睇吓", signNear: "或者用旁邊部手機即刻試 →", signBarTxt: "想第一批試？", signBarBtn: "登記",
+      signSoon: "登記就快開放 🙏 遲啲再嚟睇吓", signNear: "或者用旁邊部手機即刻試 →", signBarTxt: "免費登記，開始試用即通知你", signBarBtn: "登記", sbRider: "我係乘客", sbDriver: "我係師傅",
       faqTitle: "常見問題",
       faq: [["有冇伏？", "師傅唔使俾佣，乘客冇每程收費；冇廣告、唔賣資料。"],
             ["點維持？", "起步免費；夠 1,000 個街坊先收每年 HK$30，用嚟交伺服器同地圖費，數目公開。"],
-            ["有冇牌？", "只做持牌的士，唔涉及私家車。新嘅網約車發牌制度規管嘅係私家車平台；正式開之前會再請律師睇清楚。"],
+            ["有冇牌？", "只做持牌的士，唔涉及私家車。按 2025 年網約車條例，平台牌照係管私家車載客；只做的士嘅平台唔使呢個牌。"],
             ["幾時有得用？", "夠 10 位師傅同 100 個街坊登記就開始整，目標 2027 年 3 月 1 日試用。"]],
       privLink: "私隱政策", privTitle: "私隱政策（示範版）", privUpdated: "更新：2026 年 11 月 13 日", privClose: "明白",
       privBody: [
@@ -115,7 +117,7 @@
       feesList: [["營運", "伺服器、地圖、短訊，令 App 每日運作"], ["獎賞池", "好師傅、常客獎賞、優先卡"], ["儲備", "3 個月緊急儲備"], ["迎新", "推廣同獎賞，歡迎更多師傅同街坊加入"]],
       feesNote: "冇老闆分紅、冇投資者、冇廣告、唔賣資料：每一蚊都喺「睇數」逐項公開。",
       honestTitle: "我哋係邊個",
-      honestBody: "呢個係一個人發起嘅街坊項目，仲係示範階段。我哋會先搵一細班師傅同街坊試，夠人先正式開。起步免費，冇廣告、唔賣資料，程式碼之後會開源。",
+      honestBody: "呢個係一個人發起嘅街坊項目，仲係示範階段。我哋會先搵一細班師傅同街坊試，夠人先正式開。起步免費，冇廣告、唔賣資料；派單規則同每一蚊數目全部公開。",
       tryShow: "📇 試吓「畀師傅睇」地址卡",
       pickupLbl: "上車地點", destLbl: "目的地 · 去邊？", pickupPointLbl: "喺邊度等？",
       srcNote: "🔎 搜尋用政府地址資料庫：大部分大廈、屋苑、街道都搵到",
@@ -242,17 +244,17 @@
       },
       searchingLive: "搵緊政府地址資料庫…", noResult: "搵唔到，試吓大廈名或者街名",
       features: [
-        ["實況到達", "師傅幾時到，地圖睇得到"],
-        ["自己揀路", "實時路況，上車前傾掂"],
-        ["出價慳錢", "八五折，免附加費"],
-        ["車資清楚", "落車前計好，一撳就俾"],
-        ["語言無阻", "自動翻譯，讀畀師傅聽"],
-        ["傷健友善", "輪椅、導盲犬，都照顧到"]
+        ["唔抽佣", "師傅袋足，乘客冇加價"],
+        ["自己揀路", "上車前傾掂，大家唔使估"],
+        ["車資清楚", "落車前計好，冇爭拗"],
+        ["實況到達", "幾時到、去邊，雙方都睇到"],
+        ["語言無阻", "自動翻譯，大家都明"],
+        ["傷健友善", "一早講明，師傅有準備"]
       ],
       painsRider: [
         ["叫極都冇車", "實況等候時間同師傅位置；交更順路嘅師傅優先載你"],
         ["驚俾人兜路", "上車前自己揀路線，有實時路況；行程有記錄"],
-        ["落車先知要加錢", "落車前計好車資，附加費逐項列明；想慳可以出價八五折"]
+        ["落車先知要加錢", "落車前計好車資，附加費逐項列明，冇隱藏收費"]
       ],
       painsDriver: [
         ["平台抽佣，生意越做越難", "0% 佣金：車資、電召附加費同小費全歸你"],
@@ -337,7 +339,7 @@
       story3: "So this small potato started vibe coding and built 街坊的: no commission, open rules, neighbours helping neighbours.",
       painTitle: "What drives you mad, and what we did about it", painRiderTab: "🙋 Passengers", painDriverTab: "🚕 Drivers",
       whyRiderTitle: "Passengers",
-      whyR1: "Free to start, nothing to pay per trip, and you can offer 15% off or no surcharges",
+      whyR1: "Free to start, nothing to pay per trip; metered fares with every extra listed",
       whyR2: "Use your own language: type or just speak, and it's translated and read to your driver in Cantonese",
       whyR3: "Say when you'll be ready and see real wait times, never a fake \"guarantee\"",
       whyR4: "Travelling with an older person, a stroller, a wheelchair or lots of bags? Tell your driver in one tap",
@@ -372,11 +374,11 @@
       valNone: "None", valMeter: "Meter", valNow: "Now", valLater: "Booked", valPax: "{n} people", valBags: "{n} bags", valMore: "+{n} more", valTip: "tip ${n}", barPick: "Pick a destination to see the fare",
       sideRider: "Try the passenger app", sideDriver: "Try the driver app", sideSoon: "Sign-up opening soon", sideHint: "Works on a computer; even better on your phone",
       signTitle: "Want to be among the first?", signSub: "No payment, nothing to download. We'll message you on WhatsApp when the trial opens.", signRider: "Sign up as a passenger", signDriver: "Sign up as a driver",
-      signSoon: "Sign-up opens very soon 🙏 please check back", signNear: "Or try the phone beside this, right now →", signBarTxt: "Want to be among the first?", signBarBtn: "Sign up",
+      signSoon: "Sign-up opens very soon 🙏 please check back", signNear: "Or try the phone beside this, right now →", signBarTxt: "Sign up free, and we'll tell you when the trial opens", signBarBtn: "Sign up", sbRider: "Passenger", sbDriver: "Driver",
       faqTitle: "Questions",
       faq: [["What's the catch?", "Drivers pay no commission and passengers pay nothing per trip. No ads, and we never sell your data."],
             ["How does it keep going?", "Free to start; a HK$30 yearly subscription only from 1,000 users, to pay for servers and maps. Every dollar is published."],
-            ["Is it licensed?", "Licensed taxis only, no private cars. The new ride-hailing licences are for private-car platforms; we'll have a lawyer double-check before going live."],
+            ["Is it licensed?", "Licensed taxis only, no private cars. Under the 2025 ride-hailing law, platform licences cover private cars carrying passengers; a taxi-only platform doesn't need one."],
             ["When can I use it?", "We start building once 10 drivers and 100 passengers sign up, aiming for a trial on 1 March 2027."]],
       privLink: "Privacy", privTitle: "Privacy policy (demo)", privUpdated: "Updated 13 November 2026", privClose: "Got it",
       privBody: [
@@ -415,7 +417,7 @@
       feesList: [["Running the app", "Servers, maps and texts that keep it going every day"], ["Rewards pool", "Top Drivers, frequent-rider rewards, priority passes"], ["Reserve", "A 3-month emergency reserve"], ["Growing the crew", "Spreading the word and rewarding new drivers and neighbours who join"]],
       feesNote: "No shareholders, no ads, and we never sell your data. Every dollar shows up in Open Books.",
       honestTitle: "Who's behind this",
-      honestBody: "This is a neighbourhood project started by one person, still at demo stage. We'll start with a small group of drivers and passengers and launch properly once there are enough. Free to start, no ads, no selling your data, and the code will be open-sourced.",
+      honestBody: "This is a neighbourhood project started by one person, still at demo stage. We'll start with a small group of drivers and passengers and launch properly once there are enough. Free to start, no ads, no selling your data; dispatch rules and every dollar are published.",
       tryShow: "📇 Show-to-driver card",
       pickupLbl: "Pickup", destLbl: "Where to?", pickupPointLbl: "Where will you wait?",
       srcNote: "🔎 Search uses the Government address database: most buildings, estates and streets",
@@ -540,17 +542,17 @@
       },
       searchingLive: "Searching the Government address database…", noResult: "Nothing found. Try a building or street name",
       features: [
-        ["Live arrivals", "See when your taxi reaches you"],
-        ["Your route", "Live traffic, agreed before you go"],
-        ["Pay less", "15% off or no surcharges"],
-        ["Clear fares", "Worked out before you get out"],
-        ["Any language", "Translated and read to your driver"],
-        ["Accessible", "Wheelchairs, guide dogs and more"]
+       ["No commission", "Drivers keep it all; riders pay no extra"],
+        ["Agreed routes", "Settled before the ride, no guessing"],
+        ["Clear fares", "Worked out before drop-off, no arguments"],
+        ["Live arrivals", "When and where, both sides can see"],
+        ["Any language", "Translated so everyone understands"],
+        ["Accessible", "Needs shared upfront, drivers come prepared"]
       ],
       painsRider: [
         ["Can't get a taxi", "Real wait times and your driver's position; drivers heading your way at shift change come first"],
         ["Worried about detours", "Pick your route before the ride, with live traffic; every trip is recorded"],
-        ["Surprise charges at the end", "The fare is worked out before you get out, every extra listed; offer 15% off if you like"]
+        ["Surprise charges at the end", "The fare is worked out before you get out, with every extra listed and nothing hidden"]
       ],
       painsDriver: [
         ["Platforms take a cut", "0% commission: the fare, booking surcharge and tips are all yours"],
@@ -928,7 +930,7 @@
         <div><span>${t("spendMonth")}</span><b>HK$${money(sum(month))}</b><small>${t("spendTrips", { n: month.length })}</small></div>
         <div><span>${t("spendYear")}</span><b>HK$${money(yr)}</b><small>${t("spendTrips", { n })}</small></div>
         <div><span>${t("spendAvg")}</span><b>HK$${Math.round(yr / n)}</b></div>
-        <div class="saved"><span>${t("spendSaved")}</span><b>HK$${money(SPENT.saved)}</b></div>
+        ${OFFERS ? `<div class="saved"><span>${t("spendSaved")}</span><b>HK$${money(SPENT.saved)}</b></div>` : ""}
       </div></div>`;
   }
   const SCHED = { rider: new Set(), driver: { 0: "taken" } };
@@ -1453,10 +1455,13 @@
       <button class="fare-opt ${R.fareMode === "fixed" ? "active" : ""}" data-mode="fixed">
         <span class="fo-title">${tf("fixedT")}</span><span class="fo-price">HK$${f.low}</span>
         <span class="fo-desc">${tf("fixedD")}</span></button>`;
+    if (!OFFERS) { const o = box.querySelector('[data-mode="offer"]'); if (o) o.remove(); if (R.fareMode === "offer") R.fareMode = "meter"; }
+    if (!FIXED) { const f = box.querySelector('[data-mode="fixed"]'); if (f) f.remove(); if (R.fareMode === "fixed") R.fareMode = "meter"; }
     box.classList.remove("hidden");
     renderSaveBox(offerChips, q);
   }
   function renderSaveBox(chips, q) {
+    if (!OFFERS) { const sb0 = $("#saveBox"); if (sb0) { sb0.innerHTML = ""; sb0.classList.add("hidden"); } R.offers.clear(); return; }
     const sb = $("#saveBox"); if (!sb) return;
     sb.innerHTML = `<div class="save-head">${ic("wallet")}<b>${tf("saveTitle")}</b></div><p class="save-sub">${tf("saveSub")}</p>
       <div class="chips small offer-chips">${chips}</div>
@@ -1828,7 +1833,7 @@
     const box = $("#payAccept"); if (!box) return;
     const N = T[lang].payNames, A = T[lang].avoidNames;
     box.innerHTML = `<div class="route-head">${ic("alert")}<b>${t("avoidTitle")}</b></div>
-      <div class="chips small">${Object.keys(A).map(k => `<button class="chip ${D.avoid.has(k) ? "off" : "active"}" data-avoid="${k}" aria-pressed="${!D.avoid.has(k)}">${A[k]}</button>`).join("")}</div>
+      <div class="chips small">${Object.keys(A).filter(k => OFFERS || k !== "disc").map(k => `<button class="chip ${D.avoid.has(k) ? "off" : "active"}" data-avoid="${k}" aria-pressed="${!D.avoid.has(k)}">${A[k]}</button>`).join("")}</div>
       <p class="route-note">${t("zoneNote")} ${t("avoidNote")}</p>
       <div class="route-head">${ic("pin")}<b>${t("radiusTitle")}</b></div>
       <div class="chips small">${[1, 2, 3].map(k => `<button class="chip ${D.radius === k ? "active" : ""}" data-radius="${k}">${t("radiusOpt", { k })}</button>`).join("")}</div>`;
@@ -1951,8 +1956,11 @@
     box.classList.remove("hidden");
   });
   function nextJob() {
-    for (let i = 0; i < 4; i++) { const j = nextJobRaw(); if (!jobAvoided(j)) return j; }
-    return nextJobRaw();
+    let j = null;
+    for (let i = 0; i < 4; i++) { const c = nextJobRaw(); if (!jobAvoided(c)) { j = c; break; } }
+    j = j || nextJobRaw();
+    if (!OFFERS) j.offer = "none";
+    return j;
   }
   function nextJobRaw() {
     D.n++;
@@ -2138,7 +2146,7 @@
       if (e.target.closest("[data-when=later]")) $$("#readyRow [data-ready]").forEach(b => b.classList.remove("active"));
     }, true);
     group("when", [$("#readyRow"), whenInput, $("#readyNote")]);
-    group("save", [$("#saveBox")]);
+    if (OFFERS) group("save", [$("#saveBox")]); else $("#saveBox").classList.add("hidden");
     group("fare", [$("#fareOptions"), $("#quote")]);
     group("pay", [$("#payBox")]);
     group("needs", [carLbl, $("#carRow"), $("#prefChips"), $("#moreNeeds")]);
@@ -2212,15 +2220,16 @@
   function renderSign() {
     const hf = $("#homeFaq"); if (hf) hf.innerHTML = faqHTML();
     const sf = $("#sideFaq"); if (sf) sf.innerHTML = faqHTML();
-    const hs = $("#heroSign"); if (hs) hs.innerHTML = signBtns() + `<a href="#" class="priv-link" data-privacy>${t("privLink")}</a>`;
-    const bar = $("#signBar"); if (bar) bar.innerHTML = `<span>${t("signBarTxt")}</span><a class="btn btn-primary btn-sm" data-sign="rider" href="${CFG.riderFormUrl || "#"}" target="_blank" rel="noopener">${t("signBarBtn")}</a>`;
+    const hs = $("#heroSign"); if (hs) hs.innerHTML = "";
+    const bar = $("#signBar"); if (bar) bar.innerHTML = `<div class="sb-text"><b>${t("signBarTxt")}</b><a href="#" data-privacy>${t("privLink")}</a></div>
+      <div class="sb-btns"><a class="btn btn-primary" data-sign="rider" href="${CFG.riderFormUrl || "#"}" target="_blank" rel="noopener">${ic("user")}<span>${t("sbRider")}</span></a><a class="btn sb-alt" data-sign="driver" href="${CFG.driverFormUrl || "#"}" target="_blank" rel="noopener">${ic("car")}<span>${t("sbDriver")}</span></a></div>`;
     const n = (have, need) => `<div class="sg-prog"><div class="sg-bar"><i style="width:${Math.min(100, have / need * 100)}%"></i></div><span>${have} / ${need}</span></div>`;
     const card = $("#sideSign");
     if (card) card.innerHTML = `<h2>${t("signTitle")}</h2><p>${t("signSub")}</p><div class="sg-btns">${signBtns("big")}</div><a href="#" class="priv-link light" data-privacy>${t("privLink")}</a>
       <div class="sg-progs"><div><b>${t("launchRiders")}</b>${n(CFG.ridersSignedUp || 0, CFG.buildRiders || 100)}</div><div><b>${t("launchDrivers")}</b>${n(CFG.driversSignedUp || 0, CFG.buildDrivers || 10)}</div></div>`;
   }
   // the sticky bar only shows on the phone home page
-  function syncSignBar() { const bar = $("#signBar"); if (!bar) return; const home = $("#view-home"); bar.classList.toggle("show", !!(home && home.classList.contains("active"))); }
+  function syncSignBar() { const bar = $("#signBar"); if (!bar) return; const home = $("#view-home"); const on = !!(home && home.classList.contains("active")); bar.classList.toggle("show", on); document.body.classList.toggle("has-signbar", on); }
   document.addEventListener("click", () => setTimeout(syncSignBar, 0));
 
   // ---------------- desktop landing panel beside the phone frame

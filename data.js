@@ -39,3 +39,7 @@ window.KAIFONG_DISCOUNT = {
   maxOff: 60,
   floor: { red: 90, green: 80, blue: 80 }   // blue (Lantau) floor not yet verified
 };
+
+// Feature switches. Fare offers (discounts / waived surcharges) and fixed prices are OFF:
+// under Cap. 374D reg 40 (soliciting) and reg 47 (fares) they are high-risk for taxis (legal review, 13 Nov 2026).
+window.KAIFONG_FEATURES = { offers: false, fixedPrice: false };
