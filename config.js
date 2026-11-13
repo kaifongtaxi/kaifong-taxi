@@ -4,7 +4,7 @@ window.KAIFONG_CONFIG = {
   // Leave a link empty ("") and its button shows "sign-up opening soon".
   riderFormUrl: "https://forms.gle/BjCH8FJwkQnhD2tV6",
   driverFormUrl: "https://forms.gle/KmXADjk5oKDaN9NS6",
-  feedbackFormUrl: "",
+  feedbackFormUrl: "https://forms.gle/CQHRyohfGWj1SUxF7",
   contactEmail: "kaifongtaxi@gmail.com",
 
   // Launch progress, shown on the home page. Update the two counts by hand (e.g. weekly) from the form responses.
