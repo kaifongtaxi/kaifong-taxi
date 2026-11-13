@@ -3,7 +3,7 @@ window.KAIFONG_CONFIG = {
   // Paste your two sign-up form links (Google Forms or Tally) between the quotes.
   // Leave a link empty ("") and its button shows "sign-up opening soon".
   riderFormUrl: "https://forms.gle/BjCH8FJwkQnhD2tV6",
-  driverFormUrl: "",
+  driverFormUrl: "https://forms.gle/KmXADjk5oKDaN9NS6",
   feedbackFormUrl: "",
   contactEmail: "kaifongtaxi@gmail.com",
 
