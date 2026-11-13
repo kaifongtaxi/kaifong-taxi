@@ -2287,8 +2287,20 @@
     fit(); addEventListener("resize", fit);
   })();
 
+  // ---------------- live sign-up counts from published "count" tabs (numbers only, no personal data)
+  function loadCounts() {
+    const get = url => url ? fetch(url + (url.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" }).then(r => r.text()).then(tx => { const n = parseInt(String(tx).replace(/[^0-9]/g, " ").trim().split(/\s+/)[0], 10); return isNaN(n) ? null : n; }).catch(() => null) : Promise.resolve(null);
+    Promise.all([get(CFG.riderCountCsv), get(CFG.driverCountCsv)]).then(([r, dr]) => {
+      let changed = false;
+      if (r !== null && r !== CFG.ridersSignedUp) { CFG.ridersSignedUp = r; changed = true; }
+      if (dr !== null && dr !== CFG.driversSignedUp) { CFG.driversSignedUp = dr; changed = true; }
+      if (changed) { renderLaunch(); if (typeof renderSign === "function") renderSign(); }
+    });
+  }
+
   // ================================================================ boot
   buildPlanRows();
+  loadCounts();
   // direct link to the privacy policy (used by the sign-up forms): ...#privacy
   if (location.hash === "#privacy") setTimeout(showPrivacy, 300);
   if (location.hash === "#terms") setTimeout(showTerms, 300);

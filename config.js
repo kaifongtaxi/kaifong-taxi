@@ -4,6 +4,10 @@ window.KAIFONG_CONFIG = {
   // Leave a link empty ("") and its button shows "sign-up opening soon".
   riderFormUrl: "https://forms.gle/BjCH8FJwkQnhD2tV6",
   driverFormUrl: "https://forms.gle/KmXADjk5oKDaN9NS6",
+  // Live sign-up counts: publish ONLY a "count" tab of each responses sheet as CSV (File > Share > Publish to web)
+  // and paste the link here. The tab must contain just the number (e.g. =COUNTA('Form Responses 1'!A2:A)).
+  riderCountCsv: "",
+  driverCountCsv: "",
   feedbackFormUrl: "https://forms.gle/CQHRyohfGWj1SUxF7",
   contactEmail: "kaifongtaxi@gmail.com",
 
