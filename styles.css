@@ -1467,3 +1467,5 @@ body.has-signbar #view-home { padding-bottom: 128px; }
   .opt-body .steppers { grid-template-columns: 1fr; }
   .opt-body .stepper { min-width: 0; }
 }
+
+.faq-fb { display: inline-block; margin-top: 10px; font-weight: 700; color: #c8102e; text-decoration: none; min-height: 32px; }

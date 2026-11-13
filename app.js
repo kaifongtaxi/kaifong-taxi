@@ -75,7 +75,7 @@
       sideRider: "試乘客版", sideDriver: "試師傅版", sideSoon: "登記即將開放", sideHint: "用電腦都睇得；用手機打開，體驗更好",
       signTitle: "想第一批試？", signSub: "唔使俾錢、唔使下載。開始試用時，我哋會 WhatsApp 通知你。", signRider: "我係乘客，登記", signDriver: "我係司機，登記",
       signSoon: "登記就快開放 🙏 遲啲再嚟睇吓", signNear: "或者用旁邊部手機即刻試 →", signBarTxt: "免費登記，開始試用即通知你", signBarBtn: "登記", sbRider: "我係乘客", sbDriver: "我係師傅",
-      faqTitle: "常見問題",
+      faqTitle: "常見問題", fbLink: "仲有問題或者想法？俾意見 →", fbSoon: "意見表就快開放 🙏 可以先電郵 kaifongtaxi@gmail.com",
       faq: [["有冇伏？", "師傅唔使俾佣，乘客冇每程收費；冇廣告、唔賣資料。"],
             ["點維持？", "起步免費；夠 1,000 個街坊先收每年 HK$30，用嚟交伺服器同地圖費，數目公開。"],
             ["有冇牌？", "只做持牌的士，唔涉及私家車。按 2025 年網約車條例，平台牌照係管私家車載客；只做的士嘅平台唔使呢個牌。"],
@@ -376,7 +376,7 @@
       sideRider: "Try the passenger app", sideDriver: "Try the driver app", sideSoon: "Sign-up opening soon", sideHint: "Works on a computer; even better on your phone",
       signTitle: "Want to be among the first?", signSub: "No payment, nothing to download. We'll message you on WhatsApp when the trial opens.", signRider: "Sign up as a passenger", signDriver: "Sign up as a driver",
       signSoon: "Sign-up opens very soon 🙏 please check back", signNear: "Or try the phone beside this, right now →", signBarTxt: "Sign up free, and we'll tell you when the trial opens", signBarBtn: "Sign up", sbRider: "Passenger", sbDriver: "Driver",
-      faqTitle: "Questions",
+      faqTitle: "Questions", fbLink: "Other questions or ideas? Send feedback →", fbSoon: "The feedback form opens soon 🙏 meanwhile, email kaifongtaxi@gmail.com",
       faq: [["What's the catch?", "Drivers pay no commission and passengers pay nothing per trip. No ads, and we never sell your data."],
             ["How does it keep going?", "Free to start; a HK$30 yearly subscription only from 1,000 users, to pay for servers and maps. Every dollar is published."],
             ["Is it licensed?", "Licensed taxis only, no private cars. Under the 2025 ride-hailing law, platform licences cover private cars carrying passengers; a taxi-only platform doesn't need one."],
@@ -2196,7 +2196,8 @@
     const url = a.dataset.sign === "rider" ? CFG.riderFormUrl : CFG.driverFormUrl;
     if (!url) { e.preventDefault(); toast(t("signSoon")); }
   });
-  function faqHTML() { return `<h2>${t("faqTitle")}</h2>` + T[lang].faq.map(([q, a]) => `<details class="faq-item"><summary>${q}</summary><p>${a}</p></details>`).join(""); }
+  function faqHTML() { return `<h2>${t("faqTitle")}</h2>` + T[lang].faq.map(([q, a]) => `<details class="faq-item"><summary>${q}</summary><p>${a}</p></details>`).join("") + `<a class="faq-fb" data-feedback href="${CFG.feedbackFormUrl || "#"}" target="_blank" rel="noopener">${t("fbLink")}</a>`; }
+  document.addEventListener("click", e => { const a = e.target.closest("[data-feedback]"); if (!a) return; if (!CFG.feedbackFormUrl) { e.preventDefault(); toast(t("fbSoon")); } });
   function showPrivacy() {
     const el = $("#privacyModal"); if (!el) return;
     const mail = CFG.contactEmail || (lang === "en" ? "(email coming soon)" : "（電郵稍後公布）");
@@ -2257,6 +2258,9 @@
 
   // ================================================================ boot
   buildPlanRows();
+  // direct link to the privacy policy (used by the sign-up forms): ...#privacy
+  if (location.hash === "#privacy") setTimeout(showPrivacy, 300);
+  addEventListener("hashchange", () => { if (location.hash === "#privacy") showPrivacy(); });
   // on a computer the details are in the panel beside the phone, so the phone opens straight into the app
   if (window.matchMedia && matchMedia("(min-width: 900px)").matches) setTimeout(() => go("rider"), 0);
   setPaxLang(detectLang(), true);
