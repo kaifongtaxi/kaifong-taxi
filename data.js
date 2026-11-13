@@ -42,4 +42,4 @@ window.KAIFONG_DISCOUNT = {
 
 // Feature switches. Fare offers (discounts / waived surcharges) and fixed prices are OFF:
 // under Cap. 374D reg 40 (soliciting) and reg 47 (fares) they are high-risk for taxis (legal review, 13 Nov 2026).
-window.KAIFONG_FEATURES = { offers: false, fixedPrice: false };
+window.KAIFONG_FEATURES = { offers: true, fixedPrice: false }; // offers = passenger-initiated (Florence, 13 Nov); fixed price stays off (reg 47, fleet only)
