@@ -81,6 +81,17 @@
             ["有冇牌？", "只做持牌的士，唔涉及私家車。按 2025 年網約車條例，平台牌照係管私家車載客；只做的士嘅平台唔使呢個牌。"],
             ["會唔會又俾人收購？", "唔會賣。萬一有人想收購，或者我哋做唔落去，程式碼會全部公開，等街坊可以繼續用。"],
             ["幾時有得用？", "夠 10 位師傅同 100 個街坊登記就開始整，目標 2027 年 3 月 1 日試用。"]],
+      termsLink: "使用條款", termsTitle: "使用條款（示範版）", termsUpdated: "更新：2026 年 11 月 13 日",
+      termsBody: [
+        ["我哋嘅角色", "「街坊的」係一個社區項目（未註冊公司或慈善團體），只係提供平台畀乘客同持牌的士司機互相聯絡。我哋唔擁有、唔營運任何的士，亦唔係車程合約嘅一方：每一程車都係乘客同司機之間直接嘅協議。"],
+        ["車資同付款", "車資按咪錶同法定附加費計，乘客直接俾司機。App 顯示嘅車資只係估算，以咪錶為準。我哋唔經手任何車資。"],
+        ["大家嘅責任", "司機要遵守《道路交通（公共服務車輛）規例》等法例，並為自己嘅駕駛、收費同服務負責。乘客要提供準確資料、以禮待人。每個用戶都要為自己嘅行為負責。"],
+        ["投訴同糾紛", "有關車資、駕駛或服務嘅投訴，請向運輸署運輸投訴組或者警方提出。我哋會喺合理範圍內協助，例如提供行程記錄；我哋唔會公開涉及個別人士嘅投訴。"],
+        ["責任限制", "喺法律容許嘅範圍內，我哋唔會為司機或乘客嘅行為負責。呢度並唔排除因我哋疏忽而導致死亡或人身傷害嘅責任，亦唔影響你依法享有嘅權利。"],
+        ["示範階段", "現時網站只係示範，未有真嘅叫車服務。"],
+        ["私隱", "個人資料按私隱政策處理。"],
+        ["修改同聯絡", "我哋可能會更新條款；有問題請電郵 {mail}。條款受香港法律管轄。"]
+      ],
       privLink: "私隱政策", privTitle: "私隱政策（示範版）", privUpdated: "更新：2026 年 11 月 13 日", privClose: "明白",
       privBody: [
         ["我哋係邊個", "「街坊的」係一個街坊自發、唔係為賺錢嘅社區項目（未註冊公司或慈善團體），而家仲係示範版，冇真嘅預約、冇收錢。"],
@@ -382,6 +393,17 @@
             ["Is it licensed?", "Licensed taxis only, no private cars. Under the 2025 ride-hailing law, platform licences cover private cars carrying passengers; a taxi-only platform doesn't need one."],
             ["Will it get bought and shut down too?", "It's not for sale. If anyone ever tries to buy it, or we can't carry on, the code will be published so the community can keep it running."],
             ["When can I use it?", "We start building once 10 drivers and 100 passengers sign up, aiming for a trial on 1 March 2027."]],
+      termsLink: "Terms", termsTitle: "Terms of use (demo)", termsUpdated: "Updated 13 November 2026",
+      termsBody: [
+        ["Our role", "街坊的 is a community project (not a registered company or charity) that only helps passengers and licensed taxi drivers connect. We don't own or run taxis and we're not a party to any trip: each trip is an agreement directly between the passenger and the driver."],
+        ["Fares and payment", "Fares follow the meter and lawful surcharges, and passengers pay drivers directly. Fares shown in the app are estimates; the meter decides. We never handle fares."],
+        ["Everyone's responsibilities", "Drivers must follow the law, including the taxi regulations, and are responsible for their driving, charging and service. Passengers must give accurate details and treat drivers with respect. Every user is responsible for their own conduct."],
+        ["Complaints and disputes", "Complaints about fares, driving or service go to the Transport Department's Transport Complaints Unit or the Police. We'll help where reasonable, for example with trip records. We don't publish complaints about named individuals."],
+        ["Limits of liability", "To the extent the law allows, we're not responsible for the conduct of drivers or passengers. Nothing here excludes liability for death or personal injury caused by our negligence, or affects your legal rights."],
+        ["Demo stage", "The site is currently a demo and does not provide a real booking service."],
+        ["Privacy", "Personal data is handled under our privacy policy."],
+        ["Changes and contact", "We may update these terms; questions to {mail}. Governed by Hong Kong law."]
+      ],
       privLink: "Privacy", privTitle: "Privacy policy (demo)", privUpdated: "Updated 13 November 2026", privClose: "Got it",
       privBody: [
         ["Who we are", "街坊的 (Kaifong Taxi) is a community project, not run for profit (not a registered company or charity). It's a demo: no real bookings, no payments."],
@@ -2196,8 +2218,17 @@
     const url = a.dataset.sign === "rider" ? CFG.riderFormUrl : CFG.driverFormUrl;
     if (!url) { e.preventDefault(); toast(t("signSoon")); }
   });
-  function faqHTML() { return `<h2>${t("faqTitle")}</h2>` + T[lang].faq.map(([q, a]) => `<details class="faq-item"><summary>${q}</summary><p>${a}</p></details>`).join("") + `<a class="faq-fb" data-feedback href="${CFG.feedbackFormUrl || "#"}" target="_blank" rel="noopener">${t("fbLink")}</a>`; }
+  function faqHTML() { return `<h2>${t("faqTitle")}</h2>` + T[lang].faq.map(([q, a]) => `<details class="faq-item"><summary>${q}</summary><p>${a}</p></details>`).join("") + `<a class="faq-fb" data-feedback href="${CFG.feedbackFormUrl || "#"}" target="_blank" rel="noopener">${t("fbLink")}</a><p class="faq-legal"><a href="#" data-terms>${t("termsLink")}</a> · <a href="#" data-privacy>${t("privLink")}</a></p>`; }
   document.addEventListener("click", e => { const a = e.target.closest("[data-feedback]"); if (!a) return; if (!CFG.feedbackFormUrl) { e.preventDefault(); toast(t("fbSoon")); } });
+  function showTerms() {
+    const el = $("#privacyModal"); if (!el) return;
+    const mail = CFG.contactEmail || "kaifongtaxi@gmail.com";
+    el.innerHTML = `<div class="pv-card" role="dialog" aria-modal="true" aria-label="${t("termsTitle")}"><h2>${t("termsTitle")}</h2>
+      ${T[lang].termsBody.map(([h, p]) => `<h3>${h}</h3><p>${p.replace("{mail}", esc(mail))}</p>`).join("")}
+      <p class="pv-upd">${t("termsUpdated")} · <a href="#" data-privacy>${t("privLink")}</a></p><button class="btn btn-primary btn-block" data-act="closePriv">${t("privClose")}</button></div>`;
+    el.classList.remove("hidden");
+  }
+  document.addEventListener("click", e => { if (e.target.closest("[data-terms]")) { e.preventDefault(); showTerms(); } });
   function showPrivacy() {
     const el = $("#privacyModal"); if (!el) return;
     const mail = CFG.contactEmail || (lang === "en" ? "(email coming soon)" : "（電郵稍後公布）");
@@ -2214,11 +2245,11 @@
     const hf = $("#homeFaq"); if (hf) hf.innerHTML = faqHTML();
     const sf = $("#sideFaq"); if (sf) sf.innerHTML = faqHTML();
     const hs = $("#heroSign"); if (hs) hs.innerHTML = "";
-    const bar = $("#signBar"); if (bar) bar.innerHTML = `<div class="sb-text"><b>${t("signBarTxt")}</b><a href="#" data-privacy>${t("privLink")}</a></div>
+    const bar = $("#signBar"); if (bar) bar.innerHTML = `<div class="sb-text"><b>${t("signBarTxt")}</b><span class="sb-links"><a href="#" data-terms>${t("termsLink")}</a> · <a href="#" data-privacy>${t("privLink")}</a></span></div>
       <div class="sb-btns"><a class="btn btn-primary" data-sign="rider" href="${CFG.riderFormUrl || "#"}" target="_blank" rel="noopener">${ic("user")}<span>${t("sbRider")}</span></a><a class="btn sb-alt" data-sign="driver" href="${CFG.driverFormUrl || "#"}" target="_blank" rel="noopener">${ic("car")}<span>${t("sbDriver")}</span></a></div>`;
     const n = (have, need) => `<div class="sg-prog"><div class="sg-bar"><i style="width:${Math.min(100, have / need * 100)}%"></i></div><span>${have} / ${need}</span></div>`;
     const card = $("#sideSign");
-    if (card) card.innerHTML = `<h2>${t("signTitle")}</h2><p>${t("signSub")}</p><div class="sg-btns">${signBtns("big")}</div><a href="#" class="priv-link light" data-privacy>${t("privLink")}</a>
+    if (card) card.innerHTML = `<h2>${t("signTitle")}</h2><p>${t("signSub")}</p><div class="sg-btns">${signBtns("big")}</div><span class="priv-link light"><a href="#" data-terms>${t("termsLink")}</a> · <a href="#" data-privacy>${t("privLink")}</a></span>
       <div class="sg-progs"><div><b>${t("launchRiders")}</b>${n(CFG.ridersSignedUp || 0, CFG.buildRiders || 100)}</div><div><b>${t("launchDrivers")}</b>${n(CFG.driversSignedUp || 0, CFG.buildDrivers || 10)}</div></div>`;
   }
   // the sticky bar only shows on the phone home page
@@ -2240,7 +2271,7 @@
 
     const link = (url, lbl) => url ? `<a class="side-link" href="${url}" target="_blank" rel="noopener">${lbl}</a>` : `<span class="side-link soon">${lbl.replace(/\s*→\s*$/, "")} · ${t("sideSoon")}</span>`;
     S("sideJoin").innerHTML = "";
-    S("sideHint").innerHTML = `${esc(t("sideHint"))} · <a href="#" class="priv-link inline" data-privacy>${t("privLink")}</a>`;
+    S("sideHint").innerHTML = `${esc(t("sideHint"))} · <a href="#" class="priv-link inline" data-terms>${t("termsLink")}</a> · <a href="#" class="priv-link inline" data-privacy>${t("privLink")}</a>`;
   }
   document.addEventListener("click", e => { const b = e.target.closest("[data-side]"); if (!b) return; go(b.dataset.side); });
 
@@ -2260,7 +2291,8 @@
   buildPlanRows();
   // direct link to the privacy policy (used by the sign-up forms): ...#privacy
   if (location.hash === "#privacy") setTimeout(showPrivacy, 300);
-  addEventListener("hashchange", () => { if (location.hash === "#privacy") showPrivacy(); });
+  if (location.hash === "#terms") setTimeout(showTerms, 300);
+  addEventListener("hashchange", () => { if (location.hash === "#privacy") showPrivacy(); if (location.hash === "#terms") showTerms(); });
   // on a computer the details are in the panel beside the phone, so the phone opens straight into the app
   if (window.matchMedia && matchMedia("(min-width: 900px)").matches) setTimeout(() => go("rider"), 0);
   setPaxLang(detectLang(), true);
