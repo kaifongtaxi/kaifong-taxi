@@ -80,7 +80,7 @@
             ["幾時有得用？", "夠 10 位師傅同 100 個街坊登記就開始整，目標 2027 年 3 月 1 日試用。"]],
       privLink: "私隱政策", privTitle: "私隱政策（示範版）", privUpdated: "更新：2026 年 11 月 13 日", privClose: "明白",
       privBody: [
-        ["我哋係邊個", "「街坊的」係一個非牟利嘅社區項目，而家仲係示範版，冇真嘅預約、冇收錢。"],
+        ["我哋係邊個", "「街坊的」係一個街坊自發、唔係為賺錢嘅社區項目（未註冊公司或慈善團體），而家仲係示範版，冇真嘅預約、冇收錢。"],
         ["示範版收集咩", "唔使登記，我哋唔會收你嘅名或電話。語言、付款方式、大字等設定只會儲喺你部手機（瀏覽器），我哋睇唔到。"],
         ["「目前位置」", "只會喺你同意之後用，用嚟搵附近地址（會傳去 OpenStreetMap 嘅地址服務）；我哋唔會儲存你嘅位置。"],
         ["用到嘅外部服務", "地圖：OpenStreetMap；路線：OSRM；地址：政府地址查詢服務、Photon；實時交通：運輸署開放數據；導航：Google 地圖／高德（你撳先會開）。呢啲服務各有自己嘅私隱政策。"],
@@ -380,7 +380,7 @@
             ["When can I use it?", "We start building once 10 drivers and 100 passengers sign up, aiming for a trial on 1 March 2027."]],
       privLink: "Privacy", privTitle: "Privacy policy (demo)", privUpdated: "Updated 13 November 2026", privClose: "Got it",
       privBody: [
-        ["Who we are", "街坊的 (Kaifong Taxi) is a non-profit community project. It's a demo: no real bookings, no payments."],
+        ["Who we are", "街坊的 (Kaifong Taxi) is a community project, not run for profit (not a registered company or charity). It's a demo: no real bookings, no payments."],
         ["What the demo collects", "No sign-up, and we don't collect your name or number. Settings such as language, payment method and large text stay on your phone (in your browser); we can't see them."],
         ["Current location", "Used only after you allow it, to find a nearby address (sent to OpenStreetMap's address service). We don't store your location."],
         ["Outside services", "Maps: OpenStreetMap. Routes: OSRM. Addresses: the government's Address Lookup Service and Photon. Live traffic: Transport Department open data. Navigation: Google Maps / Amap (only if you tap). Each has its own privacy policy."],
