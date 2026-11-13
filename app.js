@@ -332,7 +332,7 @@
       taglineTxt: "Hail a neighbour", driverTop: "Driver Chan · TX 2468", driverChan: "Driver Chan", levelBadge: "Top Driver ★★★",
       heroTitle: "Every street, every ride, neighbours side by side",
       heroLead: "A no-commission taxi app run by neighbours. Drivers keep every dollar; riders get no hidden charges. Free to start.",
-      tryRider: "Passenger demo", tryDriver: "Driver demo",
+      tryRider: "Rider demo", tryDriver: "Driver demo",
       statComm: "commission", statFee: "free to start", statFare: "of the fare to the driver", statNote: "HK$30 a year from 1,000 users; the first 500 get year one free",
       storyTitle: "Why 街坊的?",
       story1: "I'm an everyday passenger, not from the taxi trade. I've waited ages for a cab that never came, and felt taken the long way round.",
@@ -873,7 +873,7 @@
     wireInterest(box);
   }
   // No stray characters: keep the last 4 Chinese characters (or last 2 English words) of short text blocks together
-  const NOWIDOW = "p, li, .stat-note, .fee-item span, .save-sub, .offer-tags .tag, .short-note.car span, .unlock span, .wall-msg, .impact-grid span, .milestone, .thanks-in span, .short-note.senior span, .saved-banner span, .rest-note span, .perk span, .q-row span, .lv-row span, .driver-line em, .short-note span, .disc-rule > span, .waived span, .pc-line, .pain-q span, .pain-a span, .fo-desc, .status-sub, .eta, .nearby span, .shift-hint span, .ready-note span, .shared-note span, .feat-desc, .lp-body > span, .offer-foot, .src-note span, .tip-note, .r-sub, .bubble, .msg-meta, .arrive-banner span, .pnote";
+  const NOWIDOW = "p, li, .stat-note, .fee-item span, .save-sub, .offer-tags .tag, .short-note.car span, .unlock span, .wall-msg, .impact-grid span, .milestone, .thanks-in span, .short-note.senior span, .saved-banner span, .rest-note span, .perk span, .q-row span, .lv-row span, .driver-line em, .short-note span, .disc-rule > span, .waived span, .pc-line, .pain-q span, .pain-a span, .fo-desc, .status-sub, .eta, .nearby span, .shift-hint span, .ready-note span, .shared-note span, .feat-desc, .lp-body > span, .offer-foot, .src-note span, .tip-note, .r-sub, .bubble, .msg-meta, .arrive-banner span, .pnote, .badge span, .sp-a, .sf span, .route-note, .ro-meta, .faq-item p";
   function noWidow(el) {
     if (el.dataset.nw === el.textContent && (el.dataset.nwcut === "0" || el.querySelector(".nobr"))) return;
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let last = null, n;
@@ -954,7 +954,7 @@
     set("panel-fav", `<h2>${P.favTitle}</h2><p class="pnote">${P.favNote}</p>` + P.favs.map(f => `<div class="pcard fav"><div class="pc-head"><span class="avatar">${f[0].replace(/^Driver /, "").slice(0, 1)}</span>${f[0]}</div><div class="pc-line">${f[1]}</div><div class="pc-line">${f[2]}</div><div class="pc-line muted">${f[3]}</div><button class="btn btn-tonal" data-demo>${ic("repeat")}<span>${P.rebook}</span></button></div>`).join(""));
     set("panel-me", `<div class="pcard me"><div class="pc-head"><span class="avatar big">${ic("user")}</span>${P.meLevel}</div><div class="pc-line">${P.meStats}</div><div class="pc-line muted">${P.meNote}</div></div>` +
       `<div class="pcard rlevel"><div class="lv-row"><b>${P.rLevel}</b><span>${P.rLevelNext}</span></div><div class="lp-bar"><i style="width:${P.rLevelPct}%"></i></div></div>` +
-      `<div class="pcard loyal"><div class="pc-head">${ic("star")}<span>${P.loyalTitle}</span></div>${P.loyal.map(([q, have, need, marks]) => `<div class="quest"><div class="q-row"><span>${q}</span><b>${have}/${need}</b></div><div class="lp-bar tiers"><i style="width:${Math.min(100, have / need * 100)}%"></i>${(marks || []).map(([at, lbl]) => `<em class="tier ${have >= at ? "got" : ""}" style="left:${at / need * 100}%"><span>${lbl}</span></em>`).join("")}</div></div>`).join("")}<div class="pc-line muted">${P.loyalNote}</div></div>` +
+      `<div class="pcard loyal"><div class="pc-head">${ic("star")}<span>${P.loyalTitle}</span></div>${P.loyal.map(([q, have, need, marks]) => `<div class="quest"><div class="q-row"><span>${q}</span><b>${have}/${need}</b></div><div class="lp-bar tiers"><i style="width:${Math.min(100, have / need * 100)}%"></i>${(marks || []).map(([at, lbl]) => `<em class="tier ${have >= at ? "got" : ""}" style="left:${at / need * 100}%"><span>${lang === "en" ? at + " rides " : at + " 程 "}${lbl}</span></em>`).join("")}</div></div>`).join("")}<div class="pc-line muted">${P.loyalNote}</div></div>` +
       `<div class="pcard rquests"><div class="pc-head">${ic("check")}<span>${P.rQuestsTitle}</span></div>${P.rQuests.map(([q, have, need, pts]) => `<div class="quest ${have >= need ? "done" : ""}"><div class="q-row"><span>${q}</span><b>${have >= need ? P.questDone + " " + pts : pts}</b></div><div class="lp-bar"><i style="width:${Math.round(have / need * 100)}%"></i></div></div>`).join("")}</div>` +
       `<div class="pcard"><div class="pc-head">${ic("star")}<span>${P.rUnlockTitle}</span></div>${P.rUnlocks.map(([lv, txt, got]) => `<div class="unlock ${got ? "got" : ""}"><b>${lv}</b><span>${txt}</span>${ic(got ? "check" : "clock")}</div>`).join("")}</div>` +
       `<div class="pcard rpoints"><div class="pc-head">${ic("star")}<span>${P.rPointsTitle} · ${P.rPoints}</span></div>${P.rPerks.map(([a, b, c]) => `<div class="perk"><div><b>${a}</b><span>${b}</span></div><em>${c}</em></div>`).join("")}<div class="rbadges">${P.rBadges.map(([n, got]) => `<span class="rbadge ${got ? "got" : ""}">${ic(got ? "star" : "clock")}${n}</span>`).join("")}</div><div class="pc-line muted">${P.rImpact}</div></div>` +
@@ -2229,16 +2229,17 @@
     const S = id => document.getElementById(id); if (!S("sideTitle")) return;
     S("sideTitle").textContent = t("heroTitle");
     S("sideCopy").textContent = t("heroLead");
-    S("sideCta").innerHTML = signBtns() + `<button class="side-near" data-side="rider">${t("signNear")}</button><a href="#" class="priv-link" data-privacy>${t("privLink")}</a>`;
+    S("sideCta").innerHTML = signBtns() + `<button class="side-near" data-side="rider">${t("signNear")}</button>`;
     S("sideStats").innerHTML = [["0%", t("statComm")], ["$0", t("statFee")], ["100%", t("statFare")]].map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join("");
     S("sideFeats").innerHTML = T[lang].features.map(([n, d]) => `<div class="sf"><b>${n}</b><span>${d}</span></div>`).join("");
+    $$("#sideFeats .sf span").forEach(phraseWrap);
     S("sideStory").innerHTML = `<h2>${t("storyTitle")}</h2><p>${t("story1")}</p><p>${t("story2")}</p><p class="side-punch">${t("story3")}</p>`;
     const pl = (title, list) => `<div class="sp-col"><h3>${title}</h3>${list.map(([q, a]) => `<div class="sp-row"><span class="sp-q">${q}</span><span class="sp-a">${a}</span></div>`).join("")}</div>`;
     S("sidePains").innerHTML = `<h2>${t("painTitle")}</h2><div class="sp-grid">${pl(T[lang].whyRiderTitle, T[lang].painsRider)}${pl(T[lang].whyDriverTitle.replace(/\s*\(.*\)$/, ""), T[lang].painsDriver)}</div>`;
 
     const link = (url, lbl) => url ? `<a class="side-link" href="${url}" target="_blank" rel="noopener">${lbl}</a>` : `<span class="side-link soon">${lbl.replace(/\s*→\s*$/, "")} · ${t("sideSoon")}</span>`;
     S("sideJoin").innerHTML = "";
-    S("sideHint").textContent = t("sideHint");
+    S("sideHint").innerHTML = `${esc(t("sideHint"))} · <a href="#" class="priv-link inline" data-privacy>${t("privLink")}</a>`;
   }
   document.addEventListener("click", e => { const b = e.target.closest("[data-side]"); if (!b) return; go(b.dataset.side); });
 
@@ -2250,7 +2251,7 @@
     shell.parentNode.insertBefore(dev, shell);
     dev.querySelector(".dv-screen").appendChild(shell);
     // scale the whole phone evenly to fit the window height (keeps real iPhone proportions)
-    const fit = () => { const z = Math.max(0.72, Math.min(1, (innerHeight - 64) / 892)); dev.style.setProperty("--dz", z.toFixed(3)); };
+    const fit = () => { const top = innerHeight < 780 ? 28 : 64; const z = Math.max(0.6, Math.min(1, (innerHeight - top - 12) / 892)); dev.style.setProperty("--dz", z.toFixed(3)); };
     fit(); addEventListener("resize", fit);
   })();
 

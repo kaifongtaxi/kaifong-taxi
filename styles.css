@@ -1330,7 +1330,9 @@ html[lang="zh-HK"] #quote .preview { display: none; }
 }
 /* never shrink the phone below a realistic size: short windows scroll instead; the island scales with the screen */
 @media (min-width: 900px) {
-  .device { height: 892px; zoom: var(--dz, 1); }
+  /* scale with transform (zoom misbehaves in Safari); negative margins give back the space the scale frees */
+  .device { height: 892px; zoom: normal; transform: scale(var(--dz, 1)); transform-origin: top center;
+    margin-bottom: calc((var(--dz, 1) - 1) * 892px); margin-left: calc((var(--dz, 1) - 1) * 207px); margin-right: calc((var(--dz, 1) - 1) * 207px); }
   .dv-island { width: 30%; height: 30px; top: 10px; }
 }
 
@@ -1432,3 +1434,36 @@ body.has-signbar #view-home { padding-bottom: 128px; }
 #view-home > section.hero { padding-left: 16px; padding-right: 16px; }
 #featList { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 #featList .feat { min-width: 0; overflow-wrap: break-word; }
+
+/* toast: truly hidden unless showing (an empty pill used to peek out inside the phone mockup) */
+.toast { opacity: 0; visibility: hidden; pointer-events: none; transition: transform .25s ease, opacity .2s ease, visibility 0s linear .25s; }
+.toast:empty { display: none; }
+.toast.show { opacity: 1; visibility: visible; transition: transform .25s ease, opacity .2s ease; }
+@media (min-width: 900px) { .device .toast { position: absolute; bottom: 90px; } }
+/* desktop: never show the phone-only sign-up bar; page background fills the window */
+@media (min-width: 900px) { .sign-bar, .sign-bar.show { display: none !important; } html { background: #f5f3ef; } body { min-height: 100vh; } }
+/* level cards: keep the level title on one line, side note smaller */
+.lv-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.lv-row b { white-space: nowrap; flex: none; }
+.lv-row span { text-align: right; font-size: .8125rem; line-height: 1.4; min-width: 0; }
+/* phone screen: tab bar always at the bottom, even on short screens */
+@media (min-width: 900px) {
+  .device .app-shell { display: flex; flex-direction: column; }
+  .device .app-shell > .view.active { flex: 1 0 auto; display: flex; flex-direction: column; }
+  .device .app-shell > .view.active > .tabbar { margin-top: auto; margin-bottom: 0; }
+}
+@media (min-width: 900px) and (max-height: 779px) { .stage { padding-top: 12px; padding-bottom: 12px; } .device { margin-top: 4px; top: 8px; } }
+.priv-link.inline { display: inline; grid-column: auto; color: inherit; font-size: inherit; }
+@media (min-width: 900px) { .device .view.has-tabs { padding-bottom: 0; } }
+/* very short windows: let the page scroll past the phone instead of pinning it */
+@media (min-width: 900px) and (max-height: 619px) { .device { position: relative; top: 0; } }
+
+/* desktop tiles: text from the top, breaks only at punctuation */
+.side-feats .sf { align-content: start; }
+.side-feats .sf span .phrase, #featList .feat-desc .phrase { display: inline-block; }
+/* small phones, English: demo buttons and steppers fit */
+@media (max-width: 420px) {
+  .hero .cta-row .btn { font-size: .9375rem; padding-left: 10px; padding-right: 10px; gap: 6px; }
+  .opt-body .steppers { grid-template-columns: 1fr; }
+  .opt-body .stepper { min-width: 0; }
+}
