@@ -78,7 +78,7 @@
       faqTitle: "常見問題", fbLink: "仲有問題或者想法？俾意見 →", fbSoon: "意見表就快開放 🙏 可以先電郵 kaifongtaxi@gmail.com",
       faq: [["有冇伏？", "師傅唔使俾佣，乘客冇每程收費；冇廣告、唔賣資料。"],
             ["點維持？", "起步免費；夠 1,000 個街坊先收每年 HK$30，用嚟交伺服器同地圖費，數目公開。"],
-            ["有冇牌？", "只做持牌的士，唔涉及私家車。按 2025 年網約車條例，平台牌照係管私家車載客；只做的士嘅平台唔使呢個牌。"],
+            ["有冇牌？", "只做持牌的士，唔涉及私家車。2025 年網約車條例嘅平台牌照，係管用私家車載客嘅平台；按條文，只做的士嘅平台唔喺呢個牌照範圍。"],
             ["會唔會又俾人收購？", "唔會賣。萬一有人想收購，或者我哋做唔落去，程式碼會全部公開，等街坊可以繼續用。"],
             ["幾時有得用？", "夠 10 位師傅同 100 個街坊登記就開始整，目標 2027 年 3 月 1 日試用。"]],
       termsLink: "使用條款", termsTitle: "使用條款（示範版）", termsUpdated: "更新：2026 年 11 月 13 日",
@@ -97,7 +97,7 @@
         ["我哋係邊個", "「街坊的」係一個街坊自發、唔係為賺錢嘅社區項目（未註冊公司或慈善團體），而家仲係示範版，冇真嘅預約、冇收錢。"],
         ["示範版收集咩", "唔使登記，我哋唔會收你嘅名或電話。語言、付款方式、大字等設定只會儲喺你部手機（瀏覽器），我哋睇唔到。"],
         ["「目前位置」", "只會喺你同意之後用，用嚟搵附近地址（會傳去 OpenStreetMap 嘅地址服務）；我哋唔會儲存你嘅位置。"],
-        ["用到嘅外部服務", "地圖：OpenStreetMap；路線：OSRM；地址：政府地址查詢服務、Photon；實時交通：運輸署開放數據；導航：Google 地圖／高德（你撳先會開）。呢啲服務各有自己嘅私隱政策。"],
+        ["用到嘅外部服務", ["網站寄存：GitHub Pages", "地圖：OpenStreetMap（地圖程式經 unpkg 載入）", "路線：OSRM", "地址搜尋：政府地址查詢服務", "「目前位置」轉地址：OpenStreetMap Nominatim", "實時交通：運輸署開放數據", "翻譯：MyMemory（只會傳送要翻譯嘅字）", "繁簡轉換：程式經 jsDelivr 載入", "語音輸入：用你瀏覽器內置功能（有啲瀏覽器會將錄音交俾瀏覽器公司處理）", "導航：Google 地圖／高德（你撳先會開）"], "呢啲服務各有自己嘅私隱政策。"],
         ["登記表格", "表格（Google 表格）只收聯絡方法（WhatsApp 或電郵）同你自願答嘅問題，只用嚟通知你試用同問意見；唔會賣、唔會分享；項目停咗就全部刪除。"],
         ["想刪除資料", "隨時話我哋知（回覆通知訊息，或者電郵 {mail}），我哋會刪除。"],
         ["承諾", "冇廣告、唔賣資料。"]
@@ -391,7 +391,7 @@
       faqTitle: "Questions", fbLink: "Other questions or ideas? Send feedback →", fbSoon: "The feedback form opens soon 🙏 meanwhile, email kaifongtaxi@gmail.com",
       faq: [["What's the catch?", "Drivers pay no commission and passengers pay nothing per trip. No ads, and we never sell your data."],
             ["How does it keep going?", "Free to start; a HK$30 yearly subscription only from 1,000 users, to pay for servers and maps. Every dollar is published."],
-            ["Is it licensed?", "Licensed taxis only, no private cars. Under the 2025 ride-hailing law, platform licences cover private cars carrying passengers; a taxi-only platform doesn't need one."],
+            ["Is it licensed?", "Licensed taxis only, no private cars. The 2025 ride-hailing law licenses platforms that carry passengers in private cars; on its wording, a taxi-only platform falls outside that licence."],
             ["Will it get bought and shut down too?", "It's not for sale. If anyone ever tries to buy it, or we can't carry on, the code will be published so the community can keep it running."],
             ["When can I use it?", "We start building once 10 drivers and 100 passengers sign up, aiming for a trial on 1 March 2027."]],
       termsLink: "Terms", termsTitle: "Terms of use (demo)", termsUpdated: "Updated 13 November 2026",
@@ -410,7 +410,7 @@
         ["Who we are", "街坊的 (Kaifong Taxi) is a community project, not run for profit (not a registered company or charity). It's a demo: no real bookings, no payments."],
         ["What the demo collects", "No sign-up, and we don't collect your name or number. Settings such as language, payment method and large text stay on your phone (in your browser); we can't see them."],
         ["Current location", "Used only after you allow it, to find a nearby address (sent to OpenStreetMap's address service). We don't store your location."],
-        ["Outside services", "Maps: OpenStreetMap. Routes: OSRM. Addresses: the government's Address Lookup Service and Photon. Live traffic: Transport Department open data. Navigation: Google Maps / Amap (only if you tap). Each has its own privacy policy."],
+        ["Outside services", ["Hosting: GitHub Pages", "Maps: OpenStreetMap (map code loaded from unpkg)", "Routes: OSRM", "Address search: the government's Address Lookup Service", "“Current location” to address: OpenStreetMap Nominatim", "Live traffic: Transport Department open data", "Translation: MyMemory (only the text being translated is sent)", "Chinese script conversion: code loaded from jsDelivr", "Voice input: your browser's built-in feature (some browsers send the audio to the browser maker to process)", "Navigation: Google Maps / Amap (only if you tap)"], "Each has its own privacy policy."],
         ["Sign-up forms", "The forms (Google Forms) only collect a contact (WhatsApp or email) and anything you choose to answer. We use them only to tell you about the trial and ask for feedback. We never sell or share them, and we delete everything if the project stops."],
         ["Deleting your data", "Ask us any time (reply to our message, or email {mail}) and we'll delete it."],
         ["Our promise", "No ads, and we never sell your data."]
@@ -2254,7 +2254,7 @@
     const el = $("#privacyModal"); if (!el) return;
     const mail = CFG.contactEmail || (lang === "en" ? "(email coming soon)" : "（電郵稍後公布）");
     el.innerHTML = `<div class="pv-card" role="dialog" aria-modal="true" aria-label="${t("privTitle")}"><h2>${t("privTitle")}</h2>
-      ${T[lang].privBody.map(([h, p]) => `<h3>${h}</h3><p>${p.replace("{mail}", esc(mail))}</p>`).join("")}
+      ${T[lang].privBody.map(([h, p, note]) => `<h3>${h}</h3>` + (Array.isArray(p) ? `<ul class="pv-list">${p.map(it => { const m = it.match(/^(.+?)(：|: )(.*)$/); return `<li>${m ? `<b>${m[1]}</b>${m[2]}${m[3]}` : it}</li>`; }).join("")}</ul>` + (note ? `<p>${note}</p>` : "") : `<p>${p.replace("{mail}", esc(mail))}</p>`)).join("")}
       <p class="pv-upd">${t("privUpdated")}</p><button class="btn btn-primary btn-block" data-act="closePriv">${t("privClose")}</button></div>`;
     el.classList.remove("hidden");
   }

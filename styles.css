@@ -1522,3 +1522,8 @@ body.has-signbar .toast { bottom: 84px; }
 
 /* very small phones: two badge columns so long English badge names fit */
 @media (max-width: 359px) { .badge-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* privacy policy: outside services as a list, one per line */
+.pv-list { margin: 0 0 8px; padding-left: 18px; display: grid; gap: 4px; }
+.pv-list li { line-height: 1.5; color: #3a3e45; font-size: .9375rem; }
+.pv-list b { color: #16161a; font-weight: 700; }
