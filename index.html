@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>街坊的 Kaifong Taxi · 示範版 Demo</title>
+  <meta name="description" content="屬於街坊的街坊的：一個街坊自發、唔收佣嘅 Call 的士 App 示範版。A free, community-led taxi app for Hong Kong (demo).">
+  <meta property="og:title" content="街坊的 Kaifong Taxi · 示範版">
+  <meta property="og:description" content="屬於街坊的街坊的。唔收佣、唔加客人錢。The neighbourhood's own taxi app (demo).">
+  <meta name="theme-color" content="#c8102e">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 48 48%22%3E%3Crect width=%2248%22 height=%2248%22 rx=%2213%22 fill=%22%23c8102e%22/%3E%3Cpath d=%22M7.5 34.5 L9.8 20.2 L24 9.6 L38.2 20.2 L40.5 34.5 Z%22 fill=%22white%22/%3E%3Ctext x=%2224%22 y=%2231%22 text-anchor=%22middle%22 font-size=%2212.5%22 font-weight=%22900%22 fill=%22%23c8102e%22 font-family=%22sans-serif%22%3E%E7%9A%84%3C/text%3E%3Crect x=%226%22 y=%2237.3%22 width=%2236%22 height=%224.6%22 rx=%222.3%22 fill=%22%23d9dde2%22/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="styles.css?v=20261114i">
+</head>
+<body>
+<div class="stage">
+  <aside class="side-intro">
+    <div class="side-logo">
+      <svg viewBox="0 0 48 48" width="96" height="96" aria-hidden="true"><rect width="48" height="48" rx="13" fill="url(#lgRed)"/><path d="M4.5 35 L6 22 L24 9.5 L42 22 L43.5 35 Z" fill="#fff"/><text x="24" y="31.5" text-anchor="middle" font-size="10.5" font-weight="900" fill="#c8102e" font-family="PingFang HK, Noto Sans HK, sans-serif">街坊的</text><rect x="4" y="37.6" width="40" height="4.4" rx="2.2" fill="#d9dde2"/></svg>
+      <div class="side-wordmark"><span>街坊的</span><small>Kaifong Taxi</small></div>
+    </div>
+    <p class="side-tag">屬於街坊的街坊的</p>
+    <h1 class="side-title" id="sideTitle"></h1>
+    <p class="side-copy" id="sideCopy"></p>
+    <div class="side-cta" id="sideCta"></div>
+    <div class="side-stats" id="sideStats"></div>
+    <div class="side-story" id="sideStory"></div>
+    <div class="side-pains" id="sidePains"></div>
+    <div class="side-feats" id="sideFeats"></div>
+    <div class="side-faq" id="sideFaq"></div>
+    <div class="side-sign-card" id="sideSign"></div>
+    <div class="side-join" id="sideJoin"></div>
+    <p class="side-hint" id="sideHint"></p>
+  </aside>
+  <div class="app-shell">
+  <div class="demo-banner" data-t="demoBanner">示範版：未係真服務，資料係假嘅</div>
+
+  <header class="topbar">
+    <button class="brand" data-go="home" aria-label="街坊的 Kaifong Taxi: home">
+      <svg class="logo-mark" viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
+        <defs><linearGradient id="lgRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e3263f"/><stop offset="1" stop-color="#b30d27"/></linearGradient></defs>
+        <rect width="48" height="48" rx="13" fill="url(#lgRed)"/>
+        <path d="M7.5 34.5 L9.8 20.2 L24 9.6 L38.2 20.2 L40.5 34.5 Z" fill="#fff" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/>
+        <text x="24" y="31" text-anchor="middle" font-size="12.5" font-weight="900" fill="#c8102e" font-family="PingFang HK, Noto Sans HK, sans-serif">的</text>
+        <rect x="6" y="37.3" width="36" height="4.6" rx="2.3" fill="#d9dde2"/>
+      </svg>
+      <span class="wordmark"><span class="wm-zh">街坊的</span><span class="wm-en">Kaifong Taxi</span></span>
+    </button>
+    <div class="top-actions">
+      <button id="sizeBtn" class="lang-btn size-btn" aria-pressed="false" aria-label="大字模式 Large text">大字</button>
+      <div class="lang-wrap"><button id="langBtn" class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="語言 Language">中</button>
+        <div id="langMenu" class="lang-menu hidden" role="menu">
+          <button role="menuitem" data-lang="zh">中文（廣東話）</button>
+          <button role="menuitem" data-lang="cmn-s">普通话（简体中文）</button>
+          <button role="menuitem" data-lang="cmn-t">國語（繁體中文）</button>
+          <button role="menuitem" data-lang="en">English</button>
+          <button role="menuitem" data-lang="id">Bahasa Indonesia</button>
+          <button role="menuitem" data-lang="tl">Tagalog</button>
+          <button role="menuitem" data-lang="ur">اردو Urdu</button>
+          <button role="menuitem" data-lang="ne">नेपाली Nepali</button>
+          <button role="menuitem" data-lang="hi">हिन्दी Hindi</button>
+        </div></div>
+    </div>
+  </header>
+
+  <!-- ============ HOME ============ -->
+  <main id="view-home" class="view active">
+    <section class="hero">
+      <div class="hero-top">
+        <p class="tagline neon" data-t="taglineTxt">屬於街坊的街坊的</p>
+        <!-- Hong Kong red-and-silver taxi: own artwork, no car-brand marks -->
+        <svg class="hero-taxi" viewBox="0 0 320 140" width="190" height="83" role="img" aria-label="香港紅色的士">
+          <defs>
+            <linearGradient id="txRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ec2c45"/><stop offset=".55" stop-color="#c8102e"/><stop offset="1" stop-color="#a00b24"/></linearGradient>
+            <linearGradient id="txSilver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b4bac3"/></linearGradient>
+            <linearGradient id="txGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a5e74"/><stop offset="1" stop-color="#18212c"/></linearGradient>
+            <radialGradient id="txRim" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#f4f6f8"/><stop offset="1" stop-color="#8d949d"/></radialGradient>
+          </defs>
+          <ellipse cx="160" cy="129" rx="146" ry="7" fill="#000" opacity=".45"/>
+          <!-- roof sign -->
+          <rect x="149" y="27" width="42" height="7" rx="2" fill="#5b616b"/>
+          <path d="M145 28 L149.5 13.5 Q150.5 10.5 154 10.5 L186 10.5 Q189.5 10.5 190.5 13.5 L195 28 Z" fill="#fff" stroke="#d7dadf" stroke-width="1"/>
+          <text x="170" y="24.5" text-anchor="middle" font-size="12.5" font-weight="900" fill="#c8102e" font-family="PingFang HK, Noto Sans HK, sans-serif">的士</text>
+          <!-- body -->
+          <path d="M20 103 L20 85 Q20 74 33 72 L86 66 L111 41 Q117 34 130 34 L214 34 Q227 34 234 42 L258 66 L289 70 Q302 72 302 85 L302 103 Q302 110 295 110 L27 110 Q20 110 20 103 Z" fill="url(#txRed)"/>
+          <path d="M33 72 L86 66 L258 66 L289 70" stroke="#ff6a7e" stroke-width="1.5" fill="none" opacity=".55"/>
+          <!-- silver roof and pillars -->
+          <path d="M91 66 L113.5 42.5 Q118.5 37 130 37 L213 37 Q223.5 37 229.5 43.5 L252 66 Z" fill="url(#txSilver)"/>
+          <!-- glass -->
+          <path d="M101 64 L117.5 46 Q120.5 42 127.5 42 L159 42 L159 64 Z" fill="url(#txGlass)"/>
+          <path d="M166 42 L209 42 Q217.5 42 221.5 46.5 L239.5 64 L166 64 Z" fill="url(#txGlass)"/>
+          <path d="M122 44 L134 44 L121 62 L109 62 Z" fill="#fff" opacity=".16"/>
+          <path d="M184 44 L194 44 L207 62 L197 62 Z" fill="#fff" opacity=".13"/>
+          <!-- door seams, handles, mirror -->
+          <path d="M162.5 66 V106 M98 68 V106 M246 68 V100" stroke="#8f0a20" stroke-width="1.6" fill="none"/>
+          <rect x="138" y="75" width="15" height="3.5" rx="1.75" fill="#e9ecef"/><rect x="211" y="75" width="15" height="3.5" rx="1.75" fill="#e9ecef"/>
+          <path d="M237 59 L249 56.5 Q252 56 252.5 59 L253 63 L239 64 Z" fill="#2b313a"/>
+          <text x="205" y="94" text-anchor="middle" font-size="10" font-weight="800" fill="#fff" opacity=".92" font-family="PingFang HK, Noto Sans HK, sans-serif">街坊的</text>
+          <!-- bumpers, lights -->
+          <rect x="18" y="96" width="286" height="7" rx="3.5" fill="#cfd3d8"/>
+          <rect x="18" y="96" width="286" height="2" rx="1" fill="#fff" opacity=".7"/>
+          <path d="M292 78 L302 79 L302 87 L292 87 Q290 87 290 85 L290 80 Q290 78 292 78 Z" fill="#fff1bd"/>
+          <rect x="20" y="79" width="8" height="9" rx="2" fill="#7a0819"/>
+          <!-- wheel arches -->
+          <path d="M60 110 A28 28 0 0 1 116 110 Z" fill="#3a0710"/>
+          <path d="M224 110 A28 28 0 0 1 280 110 Z" fill="#3a0710"/>
+          <!-- wheels -->
+          <g class="wheel"><circle cx="88" cy="111" r="21" fill="#18181c"/><circle cx="88" cy="111" r="13.5" fill="url(#txRim)"/>
+            <path d="M88 99 V123 M76 111 H100 M79.5 102.5 L96.5 119.5 M96.5 102.5 L79.5 119.5" stroke="#7a818a" stroke-width="2"/><circle cx="88" cy="111" r="4" fill="#3b4048"/></g>
+          <g class="wheel"><circle cx="252" cy="111" r="21" fill="#18181c"/><circle cx="252" cy="111" r="13.5" fill="url(#txRim)"/>
+            <path d="M252 99 V123 M240 111 H264 M243.5 102.5 L260.5 119.5 M260.5 102.5 L243.5 119.5" stroke="#7a818a" stroke-width="2"/><circle cx="252" cy="111" r="4" fill="#3b4048"/></g>
+        </svg>
+      </div>
+      <h1 data-t="heroTitle">走遍全港，街坊幫街坊</h1>
+      <p class="lead" data-t="heroLead">師傅袋足車資，乘客唔使俾額外平台費。我哋而家搵第一批街坊同師傅一齊試。</p>
+      <div class="sign-row" id="heroSign"></div>
+      <div class="cta-row">
+        <button class="btn btn-primary btn-xl" data-go="rider" data-t="tryRider">乘客版 Demo</button>
+        <button class="btn btn-dark btn-xl" data-go="driver" data-t="tryDriver">🚕 試吓師傅版 Demo</button>
+      </div>
+      <div class="stats-row">
+        <div><b>0%</b><span data-t="statComm">佣金</span></div>
+        <div><b>$0</b><span data-t="statFee">起步免費</span></div>
+        <div><b>100%</b><span data-t="statFare">車資歸師傅</span></div>
+      </div>
+      <p class="stat-note" data-t="statNote">夠 1,000 個街坊先收年費：每年 HK$30，頭 500 位街坊第一年免費</p>
+      <svg class="skyline" viewBox="0 0 400 130" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="bld" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4b5266"/><stop offset="1" stop-color="#2b2f3b"/></linearGradient>
+          <linearGradient id="sea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#1a1c24"/><stop offset="1" stop-color="#0f1015"/></linearGradient>
+        </defs>
+        <!-- Victoria Peak ridge -->
+        <path d="M0 74 Q30 50 62 58 Q96 34 132 46 Q170 24 206 38 Q236 30 262 42 Q300 28 336 46 Q370 40 400 56 V104 H0 Z" fill="#262a35"/>
+        <!-- generic towers -->
+        <g fill="url(#bld)">
+          <rect x="6" y="70" width="16" height="34"/><rect x="24" y="62" width="12" height="42"/><rect x="38" y="74" width="14" height="30"/>
+          <rect x="56" y="58" width="14" height="46"/><rect x="72" y="68" width="18" height="36"/><rect x="92" y="54" width="12" height="50"/>
+          <rect x="106" y="66" width="16" height="38"/><rect x="124" y="60" width="12" height="44"/>
+          <rect x="176" y="64" width="14" height="40"/><rect x="232" y="66" width="12" height="38"/><rect x="246" y="58" width="12" height="46"/>
+          <rect x="314" y="62" width="14" height="42"/><rect x="330" y="72" width="16" height="32"/><rect x="348" y="60" width="12" height="44"/>
+          <rect x="362" y="70" width="18" height="34"/><rect x="382" y="64" width="16" height="40"/>
+        </g>
+        <!-- IFC Two: tall tower with crown -->
+        <path d="M142 104 V32 L145 26 H157 L160 32 V104 Z" fill="url(#bld)"/>
+        <path d="M144 26 L146 16 L148 26 M150 26 L151 13 L152 26 M154 26 L156 16 L158 26" stroke="#8b93a8" stroke-width="1.4" fill="none"/>
+        <path d="M145 40 H157 M145 56 H157 M145 72 H157 M145 88 H157" stroke="#ffd76a" stroke-width=".8" opacity=".6"/>
+        <!-- Bank of China Tower: triangles -->
+        <path d="M198 104 V48 L212 22 L226 48 V104 Z" fill="url(#bld)"/>
+        <path d="M198 48 L226 76 M226 48 L198 76 M198 76 L226 104 M226 76 L198 104 M205 35 L219 61 M219 35 L205 61" stroke="#a7b0c6" stroke-width="1" fill="none" opacity=".8"/>
+        <path d="M209 22 V10 M215 22 V12" stroke="#8b93a8" stroke-width="1.4"/>
+        <!-- The Center: neon bands -->
+        <rect x="262" y="48" width="16" height="56" fill="url(#bld)"/>
+        <path d="M262 56 H278 M262 64 H278 M262 72 H278 M262 80 H278" stroke-width="2" fill="none" stroke="#ff4d6d"/>
+        <path d="M262 60 H278 M262 68 H278 M262 76 H278" stroke-width="1.5" fill="none" stroke="#38e1c8" opacity=".9"/>
+        <!-- Central Plaza: pyramid top + mast -->
+        <path d="M290 104 V40 L298 28 L306 40 V104 Z" fill="url(#bld)"/>
+        <path d="M298 28 V8" stroke="#c9ccd1" stroke-width="1.4"/>
+        <path d="M291 44 H305" stroke="#ffd76a" stroke-width="1.5"/>
+        <!-- lit windows -->
+        <g fill="#ffd76a" opacity=".7">
+          <rect x="10" y="78" width="2" height="2"/><rect x="28" y="70" width="2" height="2"/><rect x="60" y="66" width="2" height="2"/><rect x="62" y="80" width="2" height="2"/>
+          <rect x="96" y="62" width="2" height="2"/><rect x="110" y="74" width="2" height="2"/><rect x="128" y="70" width="2" height="2"/><rect x="180" y="72" width="2" height="2"/>
+          <rect x="250" y="66" width="2" height="2"/><rect x="318" y="70" width="2" height="2"/><rect x="352" y="68" width="2" height="2"/><rect x="386" y="74" width="2" height="2"/>
+        </g>
+        <!-- neon signs -->
+        <rect x="74" y="74" width="12" height="6" rx="1" fill="#ff4d6d"/><rect x="334" y="78" width="10" height="6" rx="1" fill="#38e1c8"/><rect x="236" y="74" width="6" height="10" rx="1" fill="#ffd76a"/>
+        <!-- harbour -->
+        <rect x="0" y="104" width="400" height="26" fill="url(#sea)"/>
+        <g opacity=".55">
+          <path d="M146 108 H156 M148 114 H154 M200 110 H224 M204 117 H220 M262 108 H278 M264 114 H276 M292 110 H304" stroke="#8b93a8" stroke-width="1"/>
+          <path d="M74 109 H86 M76 115 H84" stroke="#ff4d6d" stroke-width="1.5"/>
+          <path d="M262 120 H278" stroke="#ff4d6d" stroke-width="1"/><path d="M334 110 H344 M336 116 H342" stroke="#38e1c8" stroke-width="1.5"/>
+        </g>
+        <!-- Star Ferry -->
+        <g transform="translate(40 110)"><path d="M0 4 H26 L23 9 H3 Z" fill="#2f6b4f"/><rect x="5" y="0" width="16" height="4" fill="#e9e3d5"/></g>
+      </svg>
+    </section>
+
+    <section class="story">
+      <h2 data-t="storyTitle">點解有街坊的？</h2>
+      <p data-t="story1">香港本地嘅 Call 的士 App，一個接一個俾大公司收購，然後收埋。</p>
+      <p data-t="story2">有啲平台向師傅抽佣，有啲向乘客加平台費。師傅賺少咗，乘客俾多咗，大家都輸。我哋仲冇得揀。</p>
+      <p class="story-punch" data-t="story3">所以我想整一個大家都用得、樣樣透明嘅 App：唔抽佣、唔加價、規則公開。</p>
+      <p class="story-sign" data-t="taglineTxt">屬於街坊的街坊的</p>
+    </section>
+
+    <section class="pains">
+      <h2 data-t="painTitle">你嘅煩惱，街坊的點解決</h2>
+      <div class="seg" role="tablist">
+        <button class="seg-btn active" data-pain="rider" role="tab" data-t="painRiderTab">🙋 乘客</button>
+        <button class="seg-btn" data-pain="driver" role="tab" data-t="painDriverTab">🚕 師傅</button>
+      </div>
+      <div id="painList" class="pain-list"></div>
+    </section>
+
+    <section class="launch" id="launchBox"></section>
+
+    <section class="cards">
+      <article class="card">
+        <div class="card-head"><span class="badge-icon">🙋</span><h2 data-t="whyRiderTitle">乘客</h2></div>
+        <ul>
+          <li data-t="whyR1">跟錶收費，冇額外平台費</li>
+          <li data-t="whyR2">打英文、打中文、打簡稱都搵到地方；師傅睇到中文路名</li>
+          <li data-t="whyR3">實況等候時間，唔會「保證」呃你</li>
+          <li data-t="whyR4">可以預約：覆診、機場、返工</li>
+        </ul>
+        <a class="btn btn-primary btn-block interest" data-form="rider" data-t="joinRider" target="_blank" rel="noopener">我想試，通知我 →</a>
+      </article>
+      <article class="card">
+        <div class="card-head"><span class="badge-icon dark">🚕</span><h2 data-t="whyDriverTitle">師傅</h2></div>
+        <ul>
+          <li data-t="whyD1">唔抽佣，車資同 $5 電召附加費全歸你</li>
+          <li data-t="whyD2">唔使轉 App：加多個生意來源啫</li>
+          <li data-t="whyD3">淡市時段嘅預約單（覆診、機場、街坊）</li>
+          <li data-t="whyD4">大字、大掣、廣東話讀單，唔使打字</li>
+        </ul>
+        <a class="btn btn-dark btn-block interest" data-form="driver" data-t="joinDriver" target="_blank" rel="noopener">我係師傅，想了解 →</a>
+      </article>
+    </section>
+
+    <section class="fees card" id="feesBox"></section>
+
+    <section class="card faq" id="homeFaq"></section>
+
+    <section class="features">
+      <h2 id="featTitle">街坊的特色</h2>
+      <div id="featList" class="feat-list"></div>
+    </section>
+
+    <section class="card honest">
+      <div class="about-logo"><svg viewBox="0 0 48 48" width="72" height="72" aria-hidden="true"><rect width="48" height="48" rx="13" fill="url(#lgRed)"/><path d="M4.5 35 L6 22 L24 9.5 L42 22 L43.5 35 Z" fill="#fff"/><text x="24" y="31.5" text-anchor="middle" font-size="10.5" font-weight="900" fill="#c8102e" font-family="PingFang HK, Noto Sans HK, sans-serif">街坊的</text><rect x="4" y="37.6" width="40" height="4.4" rx="2.2" fill="#d9dde2"/></svg><div><b>街坊的</b><span>Kaifong Taxi</span></div></div>
+      <h2 data-t="honestTitle">我哋係邊個</h2>
+      <p data-t="honestBody">呢個係一個人發起嘅街坊項目，仲係示範階段。我哋會先搵一細班師傅同街坊試，夠人先正式開。完全免費、開源。</p>
+      <button class="btn btn-ghost" data-go="show" data-t="tryShow">📇 試吓「畀師傅睇」地址卡</button>
+      <p class="contact" id="contactLine"></p>
+    </section>
+  </main>
+
+  <!-- ============ RIDER DEMO ============ -->
+  <main id="view-rider" class="view has-tabs">
+    <div class="tab-panel active" data-panel="ride">
+    <div id="riderMap" class="map" aria-label="Map"></div>
+    <div class="sheet" id="riderSheet">
+      <!-- step: plan -->
+      <div class="step active" data-step="plan">
+        <div class="nearby" id="nearbyLine"></div>
+        <label class="field field-pickup">
+          <span data-t="pickupLbl">上車地點</span>
+          <input id="pickupInput" type="search" autocomplete="off">
+        </label>
+        <button type="button" id="locBtn" class="loc-btn">目前位置</button>
+        <ul id="pickupResults" class="results"></ul>
+        <div class="mini-label" data-t="pickupPointLbl">喺邊度等？</div>
+        <div class="chips small" id="pickupPoints"></div>
+        <label class="field field-dest">
+          <span data-t="destLbl">目的地 · 去邊？</span>
+          <input id="destInput" type="search" autocomplete="off" placeholder="任何大廈、屋苑、街道… IFC、太古城、QMH">
+        </label>
+        <ul id="destResults" class="results"></ul>
+        <div class="src-note" data-t="srcNote">🔎 搜尋用政府地址資料庫：任何大廈、屋苑、街道都搵到</div>
+        <div id="routeBox" class="route-box hidden"></div>
+        <div id="saveBox" class="save-box"></div>
+
+        <div class="toggle-row">
+          <button class="chip-toggle active" data-when="now" data-t="rideNow">而家搭</button>
+          <button class="chip-toggle" data-when="later" data-t="rideLater">預約</button>
+          <input id="whenInput" type="datetime-local" class="hidden">
+        </div>
+        <div class="mini-label" data-t="readyLbl">幾時準備好？</div>
+        <div class="toggle-row" id="readyRow">
+          <button class="chip-toggle ready active" data-ready="0" data-t="readyNow">而家</button>
+          <button class="chip-toggle ready" data-ready="5" data-t="ready5">5 分鐘</button>
+          <button class="chip-toggle ready" data-ready="10" data-t="ready10">10 分鐘</button>
+          <button class="chip-toggle ready" data-ready="15" data-t="ready15">15 分鐘</button>
+        </div>
+        <div class="ready-note hidden" id="readyNote"></div>
+
+        <div class="steppers">
+          <div class="stepper"><span data-t="paxLbl">人數</span><button class="step-btn" data-step-k="pax" data-d="-1" aria-label="-">−</button><b id="paxVal">1</b><button class="step-btn" data-step-k="pax" data-d="1" aria-label="+">+</button></div>
+          <div class="stepper"><span data-t="bagsLbl">行李</span><button class="step-btn" data-step-k="bags" data-d="-1" aria-label="-">−</button><b id="bagsVal">0</b><button class="step-btn" data-step-k="bags" data-d="1" aria-label="+">+</button></div>
+        </div>
+        <div class="mini-label" data-t="carLbl">車款</div>
+        <div class="toggle-row" id="carRow">
+          <button class="chip-toggle active" data-car="any" data-t="carAny">冇所謂</button>
+          <button class="chip-toggle" data-car="five" data-t="carFive">5 座</button>
+          <button class="chip-toggle" data-car="boot" data-t="carBoot">大尾箱</button>
+          <button class="chip-toggle" data-car="tall" data-t="carTall">高身車</button>
+          <button class="chip-toggle" data-car="access" data-t="carAccess">輪椅的士</button>
+        </div>
+        <div class="chips" id="prefChips">
+          <button class="chip" data-pref="senior" data-t="prefSenior">要多啲時間</button>
+          <button class="chip" data-pref="wheelchair" data-t="prefWheel">可摺輪椅</button>
+          <button class="chip" data-pref="pet" data-t="prefPet">帶寵物</button>
+          <button class="chip more-toggle" id="moreNeedsBtn" data-t="moreNeeds">更多</button>
+        </div>
+        <div id="moreNeeds" class="more-needs hidden">
+          <div class="mini-label" data-t="grpWith">同行</div>
+          <div class="chips">
+            <button class="chip" data-pref="elder" data-t="nElder">有長者</button>
+            <button class="chip" data-pref="kids" data-t="nKids">有小朋友</button>
+            <button class="chip" data-pref="stroller" data-t="nStroller">有 BB 車</button>
+            <button class="chip" data-pref="babyseat" data-t="nBabyseat">自備 BB 座椅</button>
+            <button class="chip" data-pref="pregnant" data-t="nPregnant">有孕婦</button>
+          </div>
+          <div class="mini-label" data-t="grpMove">行動</div>
+          <div class="chips">
+            <button class="chip" data-pref="accessible" data-t="nAccessible">輪椅的士</button>
+            <button class="chip" data-pref="walker" data-t="nWalker">用拐杖</button>
+            <button class="chip" data-pref="guidedog" data-t="nGuidedog">帶導盲犬</button>
+            <button class="chip" data-pref="deaf" data-t="nDeaf">聽障，打字傾</button>
+            <button class="chip" data-pref="blind" data-t="nBlind">視障，到咗叫我</button>
+          </div>
+          <div class="mini-label" data-t="grpPref">喜好</div>
+          <div class="chips">
+            <button class="chip" data-pref="quiet" data-t="nQuiet">唔想傾偈</button>
+            <button class="chip" data-pref="carsick" data-t="nCarsick">會暈車浪</button>
+            <button class="chip" data-pref="ac" data-t="nAc">冷氣細啲</button>
+          </div>
+          <label class="field"><span data-t="driverNoteLbl">同師傅講（自選）</span><input id="needNote" type="text" autocomplete="off"></label>
+        </div>
+
+        <div id="payBox" class="route-box"></div>
+        <div id="fareOptions" class="fare-options hidden"></div>
+        <div id="quote" class="quote hidden"></div>
+        <button id="bookBtn" class="btn btn-primary btn-xl btn-block" disabled data-t="bookBtn">Call 的士</button>
+      </div>
+
+      <!-- step: searching -->
+      <div class="step" data-step="search">
+        <div class="status-big" data-t="searching">搵緊師傅…</div>
+        <div class="status-sub" id="searchSub"></div>
+        <button class="btn btn-ghost btn-block" data-act="cancelSearch" data-t="cancelFree">取消（免費）</button>
+      </div>
+
+      <!-- step: matched -->
+      <div class="step" data-step="matched">
+        <div id="schedBadge" class="sched-badge hidden"></div>
+        <div class="arrive-banner hidden" id="arriveBanner"></div>
+        <div class="status-big" id="matchedTitle"></div>
+        <div class="plate">TX 2468</div>
+        <div class="driver-line"><span class="taxi-chip red" data-t="redTaxi">紅的</span> <span data-t="driverChan">陳師傅</span> <span class="level-badge" data-t="levelBadge">好師傅 ★★★</span><br>4.8★ · 320 <span data-t="trips">程</span> · <em data-t="driverTags">揸車穩陣、幫手搬行李</em></div>
+        <div class="offer-summary" id="offerSummary"></div>
+        <div id="routeAgree" class="route-agree hidden"></div>
+        <div class="eta" id="etaLine"></div>
+        <div class="btn-row">
+          <button class="btn btn-dark" data-act="call" data-t="callDriver">📞 打俾師傅</button>
+          <button class="btn btn-ghost" data-act="phrases" data-t="quickPhrases">💬 一撳講</button>
+        </div>
+        <div id="phraseBox" class="chat hidden">
+          <div class="chat-log" id="riderChatLog" aria-live="polite"></div>
+          <div class="chat-quick" id="riderQuick"></div>
+          <div class="chat-input"><button class="mic-btn" id="riderMic" aria-label="講嘢 Speak"></button><input id="riderMsg" type="text" autocomplete="off"><button class="btn btn-primary" id="riderSend" data-t="send">傳送</button></div>
+          <div class="tr-preview" id="riderTrPrev"></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-tonal" data-act="comingDown" data-t="comingDown">我落緊樓</button>
+          <button class="btn btn-dark" data-act="moreTime" data-t="moreTime">要多 5 分鐘</button>
+        </div>
+        <button class="btn btn-primary btn-block" data-act="arrive" data-t="simArrive">（示範）師傅到咗 ▶</button>
+        <button class="btn btn-link btn-block" data-act="cancelMatched" id="cancelMatchedBtn"></button>
+        <div class="shared-note" data-t="sharedNote">🤝 你同師傅見到嘅資料一模一樣：時間、車資估算、出價、等候計時</div>
+      </div>
+
+      <!-- step: arrived -->
+      <div class="step" data-step="arrived">
+        <div class="status-big" data-t="arrived">師傅到咗，等緊你</div>
+        <div class="timer" id="waitTimer">0:00</div>
+        <div class="status-sub" data-t="grace">等候寬限 5 分鐘 · 師傅同你睇到同一個時間</div>
+        <div class="plate small">TX 2468</div>
+        <button class="btn btn-primary btn-xl btn-block" data-act="startTrip" data-t="simBoard">（示範）上咗車 ▶</button>
+      </div>
+
+      <!-- step: done -->
+      <div class="step" data-step="done">
+        <div class="status-big" data-t="doneTitle">到咗喇，唔該晒！</div>
+        <div id="receipt" class="receipt"></div>
+        <div class="btn-row">
+          <button class="btn btn-primary" data-act="fareOk" data-t="fareOk">✓ 同咪錶一樣</button>
+          <button class="btn btn-ghost" data-act="fareBad" data-t="fareBad">✗ 唔一樣</button>
+        </div>
+        <h3 data-t="rateDriver">評吓陳師傅</h3>
+        <div class="stars" id="riderStars"></div>
+        <div class="after-ride" id="riderAfter"></div>
+        <div class="chips" id="riderTags"></div>
+        <div class="note-box">
+          <div class="chips small" id="riderThanks"></div>
+          <div class="chat-input bare"><input id="riderNote" type="text" autocomplete="off"><button class="btn btn-tonal" data-act="sendNote" data-t="sendNoteBtn">送出</button></div>
+        </div>
+        <a class="btn btn-primary btn-block interest" data-form="rider" data-t="joinRider" target="_blank" rel="noopener">我想試，通知我 →</a>
+        <button class="btn btn-link btn-block" data-act="restartRider" data-t="again">再試一次</button>
+      </div>
+    </div>
+    </div><!-- /ride panel -->
+    <div class="tab-panel panel-page" data-panel="sched" id="panel-sched"></div>
+    <div class="tab-panel panel-page" data-panel="fav" id="panel-fav"></div>
+    <div class="tab-panel panel-page" data-panel="me" id="panel-me"></div>
+    <nav class="tabbar">
+      <button class="active" data-tab="ride"><span class="tab-ic">🚕</span><span class="tab-lbl">叫車</span></button>
+      <button data-tab="sched"><span class="tab-ic">📅</span><span class="tab-lbl">預約</span></button>
+      <button data-tab="fav"><span class="tab-ic">🧑‍✈️</span><span class="tab-lbl">我嘅師傅</span></button>
+      <button data-tab="me"><span class="tab-ic">🙋</span><span class="tab-lbl">我</span></button>
+    </nav>
+  </main>
+
+  <!-- ============ DRIVER DEMO ============ -->
+  <main id="view-driver" class="view driver-mode has-tabs">
+    <div class="driver-top">
+      <div>
+        <div class="driver-name" data-t="driverTop">陳師傅 · TX 2468</div>
+        <div class="driver-sub" id="driverStatus"></div>
+      </div>
+      <button id="onlineBtn" class="btn btn-online" data-t="goOnline">開工</button>
+    </div>
+
+    <div class="tab-panel active" data-panel="jobs">
+    <div class="driver-panel">
+      <div class="level-card" id="levelCard"></div>
+      <button class="btn btn-dark-on btn-block" id="shiftBtn" data-t="shiftSetup">🔄 交更設定</button>
+      <div id="shiftPanel" class="shift-panel hidden">
+        <label><span data-t="shiftTimeLbl">交更時間</span><input type="time" id="shiftTime" value="16:00"></label>
+        <label><span data-t="shiftAreaLbl">交更地點（只顯示地區）</span>
+          <input id="shiftArea" type="search" autocomplete="off" value="九龍灣 · Kowloon Bay" data-place="九龍灣"></label>
+          <ul id="shiftAreaResults" class="results dark-results"></ul>
+          <label class="hidden-label"></label>
+        <button class="btn btn-online" id="shiftToggle" data-t="shiftOn">開交更模式</button>
+      </div>
+    </div>
+
+    <div class="driver-body">
+      <div id="payAccept" class="route-box pay-accept"></div>
+      <div class="dstep active" data-dstep="idle">
+        <div class="idle-msg" id="idleMsg"></div>
+      </div>
+
+      <div class="dstep" data-dstep="offer">
+        <div class="offer-card">
+          <div class="offer-head"><span data-t="newJob">有客！</span> <span id="offerCountdown" class="countdown">15</span></div>
+          <div class="offer-sum" id="offerSum"></div>
+          <div class="offer-meta" id="offerMeta"></div>
+          <div class="offer-tags" id="offerTags"></div>
+          <div class="addr-block">
+            <div class="addr-label" data-t="pickupShort">上車</div>
+            <div class="addr-zh" id="offerPickupZh"></div>
+            <div class="addr-road" id="offerPickupRoad"></div>
+          </div>
+          <div class="addr-block">
+            <div class="addr-label" data-t="dropShort">落車</div>
+            <div class="addr-zh" id="offerDropZh"></div>
+            <div class="addr-road" id="offerDropRoad"></div>
+          </div>
+          <div class="offer-pts" id="offerPts"></div>
+          <div class="offer-foot" id="offerFoot"></div>
+        </div>
+        <button class="btn btn-accept" data-act="accept" data-t="accept">接單</button>
+        <button class="btn btn-link btn-block light" data-act="decline" data-t="decline">唔接（唔會扣分）</button>
+      </div>
+
+      <div class="dstep" data-dstep="enroute">
+        <div class="trip-card">
+          <div class="addr-label" data-t="goPickup">去接客</div>
+          <div class="addr-zh" id="enPickupZh"></div>
+          <div class="addr-road" id="enPickupRoad"></div>
+          <div class="rider-line" id="riderLine"></div>
+        </div>
+        <div class="chat dark" id="driverChat">
+          <div class="chat-log" id="driverChatLog" aria-live="polite"></div>
+          <div class="chat-quick" id="driverQuick"></div>
+          <div class="chat-input"><button class="mic-btn big" id="driverMic" aria-label="講嘢 Speak"></button><input id="driverMsg" type="text" autocomplete="off"><button class="btn btn-online" id="driverSend" data-t="send">傳送</button></div>
+          <div class="tr-preview dark" id="driverTrPrev"></div>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-dark-on" id="navLink" target="_blank" rel="noopener" data-t="navigate">🧭 導航</a>
+          <button class="btn btn-dark-on" data-act="callRider" data-t="callRider">📞 打俾客</button>
+        </div>
+        <button class="btn btn-accept" data-act="dArrived" data-t="iArrived">我到咗</button>
+      </div>
+
+      <div class="dstep" data-dstep="ontrip">
+        <div class="trip-card">
+          <div class="addr-label" data-t="dropShort">落車</div>
+          <div class="addr-zh" id="tripDropZh"></div>
+          <div class="addr-road" id="tripDropRoad"></div>
+        </div>
+        <a id="tripNav" class="btn btn-dark-on btn-block trip-nav" target="_blank" rel="noopener"></a>
+        <div id="tripSoon" class="trip-soon hidden"></div>
+        <label class="meter-field">
+          <span data-t="enterMeter">輸入咪錶車資</span>
+          <input id="meterInput" type="number" inputmode="decimal" step="0.1" min="0" placeholder="123.40">
+        </label>
+        <div id="addonBox" class="route-box pay-accept addon-box"></div>
+        <div id="meterCalc" class="meter-calc hidden"></div>
+        <button class="btn btn-accept" data-act="dComplete" data-t="complete">完成</button>
+      </div>
+
+      <div class="dstep" data-dstep="dDone">
+        <div class="trip-card">
+          <div class="status-big light" data-t="dDoneTitle">完成！唔該晒師傅</div>
+          <div id="dReceipt" class="receipt dark"></div>
+          <h3 data-t="rateRider">評吓呢位客</h3>
+          <div class="stars" id="driverStars"></div>
+          <div class="after-ride dark" id="driverAfter"></div>
+          <div class="chips" id="driverTags"></div>
+          <div class="thanks-in" id="thanksIn"></div>
+          <div class="chat-input bare dark-in"><input id="driverNote" type="text" autocomplete="off"><button class="btn btn-online" data-act="sendDNote" data-t="sendNoteBtn">送出</button></div>
+        </div>
+        <a class="btn btn-accept interest" data-form="driver" data-t="joinDriver" target="_blank" rel="noopener">我係師傅，想了解 →</a>
+        <button class="btn btn-link btn-block light" data-act="restartDriver" data-t="again">再試一次</button>
+      </div>
+    </div>
+    </div><!-- /jobs panel -->
+    <div class="tab-panel panel-page dark" data-panel="dsched" id="panel-dsched"></div>
+    <div class="tab-panel panel-page dark" data-panel="earn" id="panel-earn"></div>
+    <div class="tab-panel panel-page dark" data-panel="dme" id="panel-dme"></div>
+    <nav class="tabbar dark">
+      <button class="active" data-tab="jobs"><span class="tab-ic">🚕</span><span class="tab-lbl">接單</span></button>
+      <button data-tab="dsched"><span class="tab-ic">📅</span><span class="tab-lbl">預約單</span></button>
+      <button data-tab="earn"><span class="tab-ic">💰</span><span class="tab-lbl">收入</span></button>
+      <button data-tab="dme"><span class="tab-ic">⭐</span><span class="tab-lbl">我</span></button>
+    </nav>
+  </main>
+
+  <!-- ============ SHOW TO DRIVER ============ -->
+  <main id="view-show" class="view">
+    <section class="card">
+      <h2 data-t="showTitle">畀師傅睇</h2>
+      <p data-t="showLead">揀個地方，放大畀的士師傅睇。喺街上揚手叫的士都用得。</p>
+      <label class="field">
+        <span data-t="destLbl">目的地 · 去邊？</span>
+        <input id="showInput" type="search" autocomplete="off" placeholder="IFC, Times Square, QMH…">
+      </label>
+      <ul id="showResults" class="results"></ul>
+    </section>
+    <div id="showCard" class="show-card hidden" role="dialog" aria-modal="true">
+      <div class="show-hello">師傅，唔該去：</div>
+      <div class="show-zh" id="showZh"></div>
+      <div class="show-addr" id="showAddr"></div>
+      <div class="show-en" id="showEn"></div>
+      <button class="btn btn-ghost" data-act="closeShow" data-t="close">關閉</button>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  </div><!-- /app-shell -->
+</div><!-- /stage -->
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="config.js?v=20261114i"></script>
+  <script src="data.js?v=20261114i"></script>
+  <script src="places-hk.js?v=20261114i"></script>
+  <script src="app.js?v=20261114i"></script>
+  <div id="payShow" class="pay-show hidden"></div>
+  <div id="signBar" class="sign-bar"></div>
+</body>
+</html>
